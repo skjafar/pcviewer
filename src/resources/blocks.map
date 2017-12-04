@@ -1,0 +1,26 @@
+# name,sector,offset,number of words
+
+DSP Firmware,1,0,65536
+
+Waveform 10,4,0,16384
+Waveform 9,5,0,16384
+Waveform 8,6,0,16384
+Waveform 7,7,0,16384
+Waveform 6,8,0,16384
+Waveform 5,9,0,16384
+Waveform 4,10,0,16384
+Waveform 3,11,0,16384
+Waveform 2,12,0,16384
+Waveform 1,13,0,16384
+Waveform 0,14,0,16384
+
+Parameter Set 1,15,0,256
+Parameter Set 2,16,0,256
+Parameter Set 3,17,0,256
+Parameter Set 4,18,0,256
+
+RAM,19,0,16384
+TEMPERATURE_IDAC log,19,1179648,16384
+
+#NIOS Firmware,20,0,0
+#FPGA Firmware,21,0,0

@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>693</width>
+    <height>334</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Main Control</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QGroupBox" name="grpDC">
+      <property name="styleSheet">
+       <string notr="true">QGroupBox
+{
+	border: 1px solid gray;
+	border-radius: 4px;
+	margin-top: 0.5em;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin: margin;
+	left: 10px;
+	padding: 0 3px 0 3px;
+}</string>
+      </property>
+      <property name="title">
+       <string>DC Settings</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Reference :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblReferenceCurrent">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblUnits">
+         <property name="text">
+          <string>A</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtReferenceCurrent">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <layout class="QHBoxLayout" name="lytExpertSettings">
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>DC Settings</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/settings.png</normaloff>:/resources/images/settings.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnWaveformSettings">
+        <property name="text">
+         <string>Waveform Settings</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/settings.png</normaloff>:/resources/images/settings.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <widget class="QGroupBox" name="grpWaveform">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox
+{
+	border: 1px solid gray;
+	border-radius: 4px;
+	margin-top: 0.5em;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin: margin;
+	left: 10px;
+	padding: 0 3px 0 3px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Waveform Settings</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="lytArmMode">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Arm Mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSemiAutomatic">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>SemiAuto</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnAutomatic">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Automatic</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnManual">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Manual</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Next waveform:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblNextWaveform">
+           <property name="text">
+            <string>Waveform 0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSkip">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Skip</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/skip.png</normaloff>:/resources/images/skip.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytWaveformControl">
+         <item>
+          <widget class="QPushButton" name="btnTrigger">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Trigger</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/play.png</normaloff>:/resources/images/play.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnPause">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Pause</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/pause.png</normaloff>:/resources/images/pause.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnResume">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Resume</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/resume.png</normaloff>:/resources/images/resume.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnStop">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Stop</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/stop.png</normaloff>:/resources/images/stop.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="lytGlobalStateMachine">
+      <item>
+       <widget class="QPushButton" name="btnOpenloop">
+        <property name="text">
+         <string>Openloop</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnOff">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Off</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/off.png</normaloff>:/resources/images/off.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnStandby">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Standby</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/standby.png</normaloff>:/resources/images/standby.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="btnON">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ON&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>ON</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources.qrc">
+            <normaloff>:/resources/images/dc.png</normaloff>:/resources/images/dc.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>17</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="lytInterlock">
+      <item>
+       <widget class="QLabel" name="lblInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Interlock</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblState">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string>N/A</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>ILOAD=</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblILOAD">
+        <property name="text">
+         <string>0 A</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboMode">
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>DC</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Waveform</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnReset">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/reset.png</normaloff>:/resources/images/reset.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSendInterlock">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Interlock</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/interlock.png</normaloff>:/resources/images/interlock.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>693</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionSettingsEnableWrites"/>
+   </widget>
+   <widget class="QMenu" name="menuParameterization">
+    <property name="title">
+     <string>Parameterization</string>
+    </property>
+    <addaction name="actionParameterizationDownload"/>
+    <addaction name="actionParameterizationUpload"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuUpdateFirmware">
+     <property name="title">
+      <string>Update Firmware</string>
+     </property>
+     <addaction name="actionUpdateDSP"/>
+     <addaction name="actionUpdateFPGA"/>
+     <addaction name="actionUpdateNIOS"/>
+    </widget>
+    <addaction name="actionRawRegistersShow"/>
+    <addaction name="actionWaveformSettings"/>
+    <addaction name="actionPlotterShow"/>
+    <addaction name="actionLoggerShow"/>
+    <addaction name="actionDPCFaultsShow"/>
+    <addaction name="actionFaultsShow"/>
+    <addaction name="actionTest"/>
+    <addaction name="actionStates"/>
+    <addaction name="actionTune"/>
+    <addaction name="separator"/>
+    <addaction name="actionRestartFirmware"/>
+    <addaction name="menuUpdateFirmware"/>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuParameterization"/>
+  </widget>
+  <widget class="QStatusBar" name="stbMain"/>
+  <action name="actionSettingsEnableWrites">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enable writes</string>
+   </property>
+  </action>
+  <action name="actionParameterizationDownload">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/download.png</normaloff>:/resources/images/download.png</iconset>
+   </property>
+   <property name="text">
+    <string>Download to File</string>
+   </property>
+  </action>
+  <action name="actionParameterizationUpload">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/upload.png</normaloff>:/resources/images/upload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Upload to Flash</string>
+   </property>
+  </action>
+  <action name="actionLoggerShow">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/logger.png</normaloff>:/resources/images/logger.png</iconset>
+   </property>
+   <property name="text">
+    <string>Logger</string>
+   </property>
+  </action>
+  <action name="actionPlotterShow">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/plot.png</normaloff>:/resources/images/plot.png</iconset>
+   </property>
+   <property name="text">
+    <string>Plotter</string>
+   </property>
+  </action>
+  <action name="actionFaultsShow">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/interlock.png</normaloff>:/resources/images/interlock.png</iconset>
+   </property>
+   <property name="text">
+    <string>Faults</string>
+   </property>
+  </action>
+  <action name="actionRawRegistersShow">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/registers.png</normaloff>:/resources/images/registers.png</iconset>
+   </property>
+   <property name="text">
+    <string>Raw Registers</string>
+   </property>
+  </action>
+  <action name="actionWaveformSettings">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/settings.png</normaloff>:/resources/images/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Waveforms</string>
+   </property>
+  </action>
+  <action name="actionDC_Settings">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/settings.png</normaloff>:/resources/images/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>DC Settings</string>
+   </property>
+  </action>
+  <action name="actionRestartFirmware">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/restart.png</normaloff>:/resources/images/restart.png</iconset>
+   </property>
+   <property name="text">
+    <string>Restart Firmware</string>
+   </property>
+  </action>
+  <action name="actionUpdateDSP">
+   <property name="text">
+    <string>DSP</string>
+   </property>
+  </action>
+  <action name="actionUpdateFPGA">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>FPGA</string>
+   </property>
+  </action>
+  <action name="actionUpdateNIOS">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>NIOS</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
+   </property>
+  </action>
+  <action name="actionStates">
+   <property name="text">
+    <string>States</string>
+   </property>
+  </action>
+  <action name="actionTune">
+   <property name="text">
+    <string>Tune</string>
+   </property>
+  </action>
+  <action name="actionDPCFaultsShow">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/resources/images/interlock.png</normaloff>:/resources/images/interlock.png</iconset>
+   </property>
+   <property name="text">
+    <string>DPC Faults</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,301 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BLOCKSMAP_H	blocks_map.h	2;"	d
+BLOCK_H	block.h	2;"	d
+BLOCK_REQUEST_H	block_request.h	2;"	d
+BLOCK_REQUEST_MACHINE_H	block_request_machine.h	2;"	d
+Block	block.cpp	/^Block::Block(Communicator* communicator, RegistersMap* registers, QString name, uint32_t address, uint32_t offset, uint32_t numberOfRegisters, QObject *parent) :$/;"	f	class:Block
+Block	block.h	/^class Block : public QObject$/;"	c
+BlockRequest	block_request.cpp	/^BlockRequest::BlockRequest(BlockRequestType requestType, uint32_t address, uint32_t offset, uint32_t numberOfRegisters, QObject *parent) :$/;"	f	class:BlockRequest
+BlockRequest	block_request.h	/^class BlockRequest : public QObject$/;"	c
+BlockRequestMachine	block_request_machine.cpp	/^BlockRequestMachine::BlockRequestMachine(BlockRequestType type, Block *block, RegistersMap *registers, QObject *parent) :$/;"	f	class:BlockRequestMachine
+BlockRequestMachine	block_request_machine.h	/^class BlockRequestMachine : public QObject$/;"	c
+BlockRequestReadState_AfterRead	block_request_machine.h	/^    BlockRequestReadState_AfterRead,$/;"	e	enum:uint8_t
+BlockRequestReadState_Error	block_request_machine.h	/^    BlockRequestReadState_Error$/;"	e	enum:uint8_t
+BlockRequestReadState_Initial	block_request_machine.h	/^    BlockRequestReadState_Initial,$/;"	e	enum:uint8_t
+BlockRequestReadState_Read	block_request_machine.h	/^    BlockRequestReadState_Read,$/;"	e	enum:uint8_t
+BlockRequestReadState_ReadReady	block_request_machine.h	/^    BlockRequestReadState_ReadReady,$/;"	e	enum:uint8_t
+BlockRequestReadState_SectorSet	block_request_machine.h	/^    BlockRequestReadState_SectorSet,$/;"	e	enum:uint8_t
+BlockRequestReadState_Transient	block_request_machine.h	/^    BlockRequestReadState_Transient,$/;"	e	enum:uint8_t
+BlockRequestReadState_VerifySectorSet	block_request_machine.h	/^    BlockRequestReadState_VerifySectorSet,$/;"	e	enum:uint8_t
+BlockRequestType_Read	block_request.h	/^    BlockRequestType_Read = 0x01,$/;"	e	enum:uint8_t
+BlockRequestType_Write	block_request.h	/^    BlockRequestType_Write = 0x02$/;"	e	enum:uint8_t
+BlockRequestWriteState_AfterWrite	block_request_machine.h	/^    BlockRequestWriteState_AfterWrite,$/;"	e	enum:uint8_t
+BlockRequestWriteState_DownloadDone	block_request_machine.h	/^    BlockRequestWriteState_DownloadDone,$/;"	e	enum:uint8_t
+BlockRequestWriteState_DownloadReady	block_request_machine.h	/^    BlockRequestWriteState_DownloadReady,$/;"	e	enum:uint8_t
+BlockRequestWriteState_Error	block_request_machine.h	/^    BlockRequestWriteState_Error$/;"	e	enum:uint8_t
+BlockRequestWriteState_Idle	block_request_machine.h	/^    BlockRequestWriteState_Idle,$/;"	e	enum:uint8_t
+BlockRequestWriteState_Initial	block_request_machine.h	/^    BlockRequestWriteState_Initial,$/;"	e	enum:uint8_t
+BlockRequestWriteState_Saving	block_request_machine.h	/^    BlockRequestWriteState_Saving,$/;"	e	enum:uint8_t
+BlockRequestWriteState_SetupSet	block_request_machine.h	/^    BlockRequestWriteState_SetupSet,$/;"	e	enum:uint8_t
+BlockRequestWriteState_WriteToFlash	block_request_machine.h	/^    BlockRequestWriteState_WriteToFlash,$/;"	e	enum:uint8_t
+BlockRequestWriteState_Written	block_request_machine.h	/^    BlockRequestWriteState_Written,$/;"	e	enum:uint8_t
+BlocksMap	blocks_map.cpp	/^BlocksMap::BlocksMap(Communicator* communicator, RegistersMap* registers) :$/;"	f	class:BlocksMap
+BlocksMap	blocks_map.h	/^struct BlocksMap$/;"	s
+CARDSCANNER_H	card_scanner.h	2;"	d
+COMMUNICATOR_H	communicator.h	2;"	d
+CardScanner	card_scanner.cpp	/^CardScanner::CardScanner(QObject *parent) : QObject(parent)$/;"	f	class:CardScanner
+CardScanner	card_scanner.h	/^class CardScanner : public QObject$/;"	c
+Communicator	communicator.cpp	/^Communicator::Communicator(QString ip, short port, QObject *parent) :$/;"	f	class:Communicator
+Communicator	communicator.h	/^class Communicator : public QObject$/;"	c
+FAULTSMAP_H	faults_map.h	2;"	d
+FaultsMap	faults_map.cpp	/^FaultsMap::FaultsMap() : m_faultsMap()$/;"	f	class:FaultsMap
+FaultsMap	faults_map.h	/^struct FaultsMap$/;"	s
+GLOBAL_STATE_MACHINE_H	global_state_machine.h	2;"	d
+GlobalStateMachine	global_state_machine.cpp	/^GlobalStateMachine::GlobalStateMachine(Register* stateMachineRegister, Register* sequencerRegister, Register* commandRegister, QObject *parent) :$/;"	f	class:GlobalStateMachine
+GlobalStateMachine	global_state_machine.h	/^class GlobalStateMachine : public QObject$/;"	c
+PARAMETERSET_H	parameter_set.h	2;"	d
+PARAMETER_TYPE_FLOATING	parameter_set.h	/^    PARAMETER_TYPE_FLOATING$/;"	e	enum:ParameterType
+PARAMETER_TYPE_INTEGRAL	parameter_set.h	/^    PARAMETER_TYPE_INTEGRAL,$/;"	e	enum:ParameterType
+Parameter	parameter_set.cpp	/^Parameter::Parameter() :$/;"	f	class:Parameter
+Parameter	parameter_set.cpp	/^Parameter::Parameter(QString name, uint16_t address, ParameterType type, bool isHex) :$/;"	f	class:Parameter
+Parameter	parameter_set.h	/^struct Parameter$/;"	s
+ParameterDefinitions	parameter_set.cpp	/^ParameterDefinitions::ParameterDefinitions() : parameters()$/;"	f	class:ParameterDefinitions
+ParameterDefinitions	parameter_set.h	/^struct ParameterDefinitions$/;"	s
+ParameterSet	parameter_set.cpp	/^ParameterSet::ParameterSet(ParameterDefinitions *definitions, QObject *parent) : QObject(parent), parameters()$/;"	f	class:ParameterSet
+ParameterSet	parameter_set.h	/^class ParameterSet : public QObject$/;"	c
+ParameterType	parameter_set.h	/^enum ParameterType$/;"	g
+REGISTERSMAP_H	registers_map.h	2;"	d
+REGISTER_H	register.h	2;"	d
+REGISTER_POLL_H	register_poll.h	2;"	d
+REGISTER_REQUEST_H	register_request.h	2;"	d
+REGISTER_TYPE_FLOATING	register.h	/^    REGISTER_TYPE_FLOATING$/;"	e	enum:RegisterType
+REGISTER_TYPE_INTEGRAL	register.h	/^    REGISTER_TYPE_INTEGRAL,$/;"	e	enum:RegisterType
+REQUEST_ERROR_ADDRESS_MISMATCH	request.h	/^    REQUEST_ERROR_ADDRESS_MISMATCH,$/;"	e	enum:request_error_t
+REQUEST_ERROR_MAX	request.h	/^    REQUEST_ERROR_MAX,$/;"	e	enum:request_error_t
+REQUEST_ERROR_MISMATCH	request.h	/^    REQUEST_ERROR_MISMATCH,$/;"	e	enum:request_error_t
+REQUEST_ERROR_SIZE_MISMATCH	request.h	/^    REQUEST_ERROR_SIZE_MISMATCH,$/;"	e	enum:request_error_t
+REQUEST_ERROR_TIMEOUT	request.h	/^    REQUEST_ERROR_TIMEOUT,$/;"	e	enum:request_error_t
+REQUEST_ERROR_UNKNOWN	request.h	/^    REQUEST_ERROR_UNKNOWN,$/;"	e	enum:request_error_t
+REQUEST_ERROR_WRITE_FAILED	request.h	/^    REQUEST_ERROR_WRITE_FAILED,$/;"	e	enum:request_error_t
+REQUEST_H	request.h	2;"	d
+Register	register.cpp	/^Register::Register(Communicator* communicator, uint16_t address, QString name, RegisterType type, bool showAsHex, QObject *parent) :$/;"	f	class:Register
+Register	register.h	/^class Register : public QObject$/;"	c
+RegisterPoll	register_poll.cpp	/^RegisterPoll::RegisterPoll(Register* register_, int pollInterval_ms, QObject *parent) :$/;"	f	class:RegisterPoll
+RegisterPoll	register_poll.h	/^class RegisterPoll : public QObject$/;"	c
+RegisterRequest	register_request.cpp	/^RegisterRequest::RegisterRequest(RegisterRequestType requestType, uint16_t address, QObject *parent) :$/;"	f	class:RegisterRequest
+RegisterRequest	register_request.h	/^class RegisterRequest : public QObject$/;"	c
+RegisterRequestType_Poll	register_request.h	/^    RegisterRequestType_Poll = 0x0004,$/;"	e	enum:uint16_t
+RegisterRequestType_Read	register_request.h	/^    RegisterRequestType_Read = 0x0001,$/;"	e	enum:uint16_t
+RegisterRequestType_Write	register_request.h	/^    RegisterRequestType_Write = 0x0002,$/;"	e	enum:uint16_t
+RegisterType	register.h	/^enum RegisterType$/;"	g
+RegistersMap	registers_map.cpp	/^RegistersMap::RegistersMap(Communicator* communicator) :$/;"	f	class:RegistersMap
+RegistersMap	registers_map.h	/^struct RegistersMap$/;"	s
+STATUS_RAW	request.h	/^const uint16_t STATUS_RAW = 0x0000;$/;"	v
+SomeRequest	request.cpp	/^SomeRequest::SomeRequest()$/;"	f	class:SomeRequest
+SomeRequest	request.cpp	/^SomeRequest::SomeRequest(BlockRequest *blockRequest, int timeout)$/;"	f	class:SomeRequest
+SomeRequest	request.cpp	/^SomeRequest::SomeRequest(RegisterRequest *request, int timeout)$/;"	f	class:SomeRequest
+SomeRequest	request.h	/^struct SomeRequest$/;"	s
+SomeRequestType	request.h	/^enum SomeRequestType$/;"	g
+SomeRequestType_Block	request.h	/^    SomeRequestType_Block$/;"	e	enum:SomeRequestType
+SomeRequestType_None	request.h	/^    SomeRequestType_None,$/;"	e	enum:SomeRequestType
+SomeRequestType_Register	request.h	/^    SomeRequestType_Register,$/;"	e	enum:SomeRequestType
+TIMEOUT_THRESHOLD	communicator.h	12;"	d
+address	block.cpp	/^uint32_t Block::address() const$/;"	f	class:Block
+address	register.h	/^    uint16_t address() const { return this->m_address; }$/;"	f	class:Register
+address	register_request.h	/^    uint16_t address() const { return this->m_address; }$/;"	f	class:RegisterRequest
+appendBytes	block_request.cpp	/^void BlockRequest::appendBytes(const char* bytes, size_t len)$/;"	f	class:BlockRequest
+blockRequest	request.h	/^        BlockRequest* blockRequest;$/;"	m	union:SomeRequest::__anon4
+blockRequestDelete	block_request_machine.cpp	/^void BlockRequestMachine::blockRequestDelete(BlockRequest *request)$/;"	f	class:BlockRequestMachine
+blockRequestDone	block_request_machine.cpp	/^void BlockRequestMachine::blockRequestDone(BlockRequest *request)$/;"	f	class:BlockRequestMachine
+blockRequestError	block_request_machine.cpp	/^void BlockRequestMachine::blockRequestError(BlockRequest *, request_error_t errCode)$/;"	f	class:BlockRequestMachine
+blocksByName	blocks_map.h	/^    QMap<QString, Block*> blocksByName;$/;"	m	struct:BlocksMap
+communicator	register.h	/^    Communicator *communicator() { return this->m_communicator; }$/;"	f	class:Register
+communicator	registers_map.h	/^    Communicator* communicator;$/;"	m	struct:RegistersMap
+controllerIP	communicator.h	/^    QString controllerIP() const { return m_ip; }$/;"	f	class:Communicator
+controllerPort	communicator.h	/^    short controllerPort() const { return m_port; }$/;"	f	class:Communicator
+currentSequencerState	global_state_machine.cpp	/^sequencer_state_t GlobalStateMachine::currentSequencerState()$/;"	f	class:GlobalStateMachine
+currentState	global_state_machine.cpp	/^global_state_t GlobalStateMachine::currentState()$/;"	f	class:GlobalStateMachine
+data	block_request.h	/^    QByteArray data() const { return this->m_data; }$/;"	f	class:BlockRequest
+data	block_request_machine.h	/^    QByteArray data() const { return this->m_data; }$/;"	f	class:BlockRequestMachine
+enablePoll	register_poll.cpp	/^void RegisterPoll::enablePoll(bool enable)$/;"	f	class:RegisterPoll
+errorDesc	request.h	/^const QString errorDesc[6] = {$/;"	v
+floatVal	register.h	/^    float floatVal() const { return this->m_float; }$/;"	f	class:Register
+floatVal	register_request.h	/^    float floatVal() const { return this->m_float; }$/;"	f	class:RegisterRequest
+freeMessage	block_request.cpp	/^void BlockRequest::freeMessage(char* message) const$/;"	f	class:BlockRequest
+freeMessage	register_request.cpp	/^void RegisterRequest::freeMessage(char* message)$/;"	f	class:RegisterRequest
+get	blocks_map.cpp	/^Block* BlocksMap::get(QString name)$/;"	f	class:BlocksMap
+get	faults_map.cpp	/^QString FaultsMap::get(uint8_t faultCode)$/;"	f	class:FaultsMap
+get	registers_map.cpp	/^Register* RegistersMap::get(QString name)$/;"	f	class:RegistersMap
+get	registers_map.cpp	/^Register* RegistersMap::get(uint16_t address)$/;"	f	class:RegistersMap
+getBlockRequest	request.cpp	/^BlockRequest* SomeRequest::getBlockRequest()$/;"	f	class:SomeRequest
+getErrorDesc	request.cpp	/^QString SomeRequest::getErrorDesc(request_error_t errorCode)$/;"	f	class:SomeRequest
+getMessage	block_request.cpp	/^char* BlockRequest::getMessage() const$/;"	f	class:BlockRequest
+getMessage	register_request.cpp	/^char* RegisterRequest::getMessage() const$/;"	f	class:RegisterRequest
+getNextRequest	block_request.h	/^    SomeRequest (*getNextRequest)(void* userArg);$/;"	m	class:BlockRequest
+getNextRequest	register_request.h	/^    SomeRequest (*getNextRequest)(void* userArg);$/;"	m	class:RegisterRequest
+getPoller	register.cpp	/^RegisterPoll* Register::getPoller(QObject *parent)$/;"	f	class:Register
+getPoller	register.cpp	/^RegisterPoll* Register::getPoller(int pollInterval_ms, QObject *parent)$/;"	f	class:Register
+getRegisterRequest	request.cpp	/^RegisterRequest* SomeRequest::getRegisterRequest()$/;"	f	class:SomeRequest
+getRequest	block_request_machine.cpp	/^SomeRequest BlockRequestMachine::getRequest()$/;"	f	class:BlockRequestMachine
+handleResponse	block_request.cpp	/^SomeRequest BlockRequest::handleResponse()$/;"	f	class:BlockRequest
+handleResponse	register_request.cpp	/^SomeRequest RegisterRequest::handleResponse(char *response, size_t responseLength)$/;"	f	class:RegisterRequest
+intVal	register.h	/^    int32_t intVal() const { return this->m_int; }$/;"	f	class:Register
+intVal	register_request.h	/^    int32_t intVal() const { return this->m_int; }$/;"	f	class:RegisterRequest
+isParameterSet	block.cpp	/^bool Block::isParameterSet() const$/;"	f	class:Block
+isPollEnabled	register_poll.cpp	/^bool RegisterPoll::isPollEnabled() const$/;"	f	class:RegisterPoll
+isRAM	block.cpp	/^bool Block::isRAM() const$/;"	f	class:Block
+loadFromBlockArray	parameter_set.cpp	/^bool ParameterSet::loadFromBlockArray(const QByteArray &data)$/;"	f	class:ParameterSet
+loadFromFile	blocks_map.cpp	/^bool BlocksMap::loadFromFile(QString filepath)$/;"	f	class:BlocksMap
+loadFromFile	faults_map.cpp	/^bool FaultsMap::loadFromFile(QString filepath)$/;"	f	class:FaultsMap
+loadFromFile	parameter_set.cpp	/^bool ParameterDefinitions::loadFromFile(QString definitionsFile)$/;"	f	class:ParameterDefinitions
+loadFromFile	parameter_set.cpp	/^bool ParameterSet::loadFromFile(QString filepath)$/;"	f	class:ParameterSet
+loadFromFile	registers_map.cpp	/^bool RegistersMap::loadFromFile(QString filepath)$/;"	f	class:RegistersMap
+m_address	block.h	/^    uint32_t m_address;$/;"	m	class:Block
+m_address	block_request.h	/^    uint32_t m_address;$/;"	m	class:BlockRequest
+m_address	parameter_set.h	/^    uint16_t m_address;$/;"	m	struct:Parameter
+m_address	register.h	/^    uint16_t m_address;$/;"	m	class:Register
+m_address	register_request.h	/^    uint16_t m_address;$/;"	m	class:RegisterRequest
+m_block	block_request_machine.h	/^    Block *m_block;$/;"	m	class:BlockRequestMachine
+m_bytes	register_request.h	/^        char m_bytes[4];$/;"	m	union:RegisterRequest::__anon3
+m_commandRegister	global_state_machine.h	/^    Register* m_commandRegister;$/;"	m	class:GlobalStateMachine
+m_communicator	block.h	/^    Communicator* m_communicator;$/;"	m	class:Block
+m_communicator	blocks_map.h	/^    Communicator* m_communicator;$/;"	m	struct:BlocksMap
+m_communicator	register.h	/^    Communicator* m_communicator;$/;"	m	class:Register
+m_data	block_request.h	/^    QByteArray m_data;$/;"	m	class:BlockRequest
+m_data	block_request_machine.h	/^    QByteArray m_data;$/;"	m	class:BlockRequestMachine
+m_dataBlockDestinationRegister	block_request_machine.h	/^    Register* m_dataBlockDestinationRegister;$/;"	m	class:BlockRequestMachine
+m_dataTransferInitRegister	block_request_machine.h	/^    Register* m_dataTransferInitRegister;$/;"	m	class:BlockRequestMachine
+m_deviceOperatingStateRegister	block_request_machine.h	/^    Register* m_deviceOperatingStateRegister;$/;"	m	class:BlockRequestMachine
+m_faultsMap	faults_map.h	/^    QMap<uint8_t, QString> m_faultsMap;$/;"	m	struct:FaultsMap
+m_float	parameter_set.h	/^        float m_float;$/;"	m	union:Parameter::__anon1
+m_float	register.h	/^        float m_float;$/;"	m	union:Register::__anon5
+m_float	register_request.h	/^        float m_float;$/;"	m	union:RegisterRequest::__anon3
+m_frontProcessed	communicator.h	/^    bool m_frontProcessed;$/;"	m	class:Communicator
+m_hex	parameter_set.h	/^    bool m_hex;$/;"	m	struct:Parameter
+m_int	parameter_set.h	/^        int32_t m_int;$/;"	m	union:Parameter::__anon1
+m_int	register.h	/^        int32_t m_int;$/;"	m	union:Register::__anon5
+m_int	register_request.h	/^        int32_t m_int;$/;"	m	union:RegisterRequest::__anon3
+m_ip	communicator.h	/^    QString m_ip;$/;"	m	class:Communicator
+m_name	block.h	/^    QString m_name;$/;"	m	class:Block
+m_name	parameter_set.h	/^    QString m_name;$/;"	m	struct:Parameter
+m_name	register.h	/^    QString m_name;$/;"	m	class:Register
+m_numberOfRegisters	block.h	/^    uint32_t m_numberOfRegisters;$/;"	m	class:Block
+m_numberOfRegisters	block_request.h	/^    uint32_t m_numberOfRegisters;$/;"	m	class:BlockRequest
+m_offset	block.h	/^    uint32_t m_offset;$/;"	m	class:Block
+m_offset	block_request.h	/^    uint32_t m_offset;$/;"	m	class:BlockRequest
+m_port	communicator.h	/^    short m_port;$/;"	m	class:Communicator
+m_readState	block_request_machine.h	/^        BlockRequestReadState  m_readState;$/;"	m	union:BlockRequestMachine::__anon2
+m_registers	block.h	/^    RegistersMap* m_registers;$/;"	m	class:Block
+m_registers	blocks_map.h	/^    RegistersMap* m_registers;$/;"	m	struct:BlocksMap
+m_remainingBytes	block_request.h	/^    uint32_t m_remainingBytes;$/;"	m	class:BlockRequest
+m_requestType	block_request.h	/^    BlockRequestType m_requestType;$/;"	m	class:BlockRequest
+m_requestType	block_request_machine.h	/^    BlockRequestType m_requestType;$/;"	m	class:BlockRequestMachine
+m_requestType	register_request.h	/^    RegisterRequestType m_requestType;$/;"	m	class:RegisterRequest
+m_requestType	request.h	/^    SomeRequestType m_requestType;$/;"	m	struct:SomeRequest
+m_requests	communicator.h	/^    QQueue<SomeRequest> m_requests;$/;"	m	class:Communicator
+m_sequencerPoller	global_state_machine.h	/^    RegisterPoll* m_sequencerPoller;$/;"	m	class:GlobalStateMachine
+m_sequencerRegister	global_state_machine.h	/^    Register* m_sequencerRegister;$/;"	m	class:GlobalStateMachine
+m_sequencerState	global_state_machine.h	/^    sequencer_state_t m_sequencerState;$/;"	m	class:GlobalStateMachine
+m_socket	card_scanner.h	/^    QUdpSocket *m_socket;$/;"	m	class:CardScanner
+m_state	global_state_machine.h	/^    global_state_t m_state;$/;"	m	class:GlobalStateMachine
+m_stateMachinePoller	global_state_machine.h	/^    RegisterPoll* m_stateMachinePoller;$/;"	m	class:GlobalStateMachine
+m_stateMachineRegister	global_state_machine.h	/^    Register* m_stateMachineRegister;$/;"	m	class:GlobalStateMachine
+m_systemOperatingStateRegister	block_request_machine.h	/^    Register* m_systemOperatingStateRegister;$/;"	m	class:BlockRequestMachine
+m_tcpSocket	communicator.h	/^    QTcpSocket *m_tcpSocket;$/;"	m	class:Communicator
+m_timeout	communicator.h	/^    int m_timeout;$/;"	m	class:Communicator
+m_timeout	request.h	/^    int m_timeout;$/;"	m	struct:SomeRequest
+m_timeoutCount	communicator.h	/^    int m_timeoutCount;$/;"	m	class:Communicator
+m_timeoutTimer	communicator.h	/^    QTimer* m_timeoutTimer;$/;"	m	class:Communicator
+m_timer	block_request_machine.h	/^    QTime m_timer;$/;"	m	class:BlockRequestMachine
+m_timer	card_scanner.h	/^    QTimer *m_timer;$/;"	m	class:CardScanner
+m_type	parameter_set.h	/^    ParameterType m_type;$/;"	m	struct:Parameter
+m_type	register.h	/^    RegisterType m_type;$/;"	m	class:Register
+m_udpSocket	communicator.h	/^    QUdpSocket *m_udpSocket;$/;"	m	class:Communicator
+m_uint	parameter_set.h	/^        uint32_t m_uint;$/;"	m	union:Parameter::__anon1
+m_uint	register.h	/^        uint32_t m_uint;$/;"	m	union:Register::__anon5
+m_uint	register_request.h	/^        uint32_t m_uint;$/;"	m	union:RegisterRequest::__anon3
+m_userArg	block_request.h	/^    void* m_userArg;$/;"	m	class:BlockRequest
+m_userArg	register_request.h	/^    void* m_userArg;$/;"	m	class:RegisterRequest
+m_valid	register.h	/^    bool m_valid;$/;"	m	class:Register
+m_writeState	block_request_machine.h	/^        BlockRequestWriteState m_writeState;$/;"	m	union:BlockRequestMachine::__anon2
+messageLength	block_request.cpp	/^uint32_t BlockRequest::messageLength() const$/;"	f	class:BlockRequest
+messageLength	register_request.cpp	/^uint32_t RegisterRequest::messageLength() const$/;"	f	class:RegisterRequest
+monitor	global_state_machine.cpp	/^void GlobalStateMachine::monitor(bool enable)$/;"	f	class:GlobalStateMachine
+name	block.cpp	/^QString Block::name() const$/;"	f	class:Block
+name	register.h	/^    QString name() const { return this->m_name; }$/;"	f	class:Register
+nextTransitionRequest	block_request_machine.cpp	/^SomeRequest nextTransitionRequest(void* userArg)$/;"	f
+numberOfRegisters	block.cpp	/^uint32_t Block::numberOfRegisters() const$/;"	f	class:Block
+offset	block.cpp	/^uint32_t Block::offset() const$/;"	f	class:Block
+onDataReceivedTCP	communicator.cpp	/^void Communicator::onDataReceivedTCP()$/;"	f	class:Communicator
+onDataReceivedUDP	card_scanner.cpp	/^void CardScanner::onDataReceivedUDP()$/;"	f	class:CardScanner
+onDataReceivedUDP	communicator.cpp	/^void Communicator::onDataReceivedUDP()$/;"	f	class:Communicator
+onError	global_state_machine.cpp	/^void GlobalStateMachine::onError(request_error_t)$/;"	f	class:GlobalStateMachine
+onHandlingDone	register.cpp	/^void Register::onHandlingDone(RegisterRequest* request)$/;"	f	class:Register
+onMachineError	block.cpp	/^void Block::onMachineError(BlockRequestMachine* machine, request_error_t errorCode)$/;"	f	class:Block
+onMachineReadDone	block.cpp	/^void Block::onMachineReadDone(BlockRequestMachine* machine)$/;"	f	class:Block
+onMachineWriteDone	block.cpp	/^void Block::onMachineWriteDone(BlockRequestMachine* machine)$/;"	f	class:Block
+onReadError	register.cpp	/^void Register::onReadError(RegisterRequest*, request_error_t errorCode)$/;"	f	class:Register
+onReadReply	register.cpp	/^void Register::onReadReply(RegisterRequest* request)$/;"	f	class:Register
+onSequencerStateRegisterChange	global_state_machine.cpp	/^void GlobalStateMachine::onSequencerStateRegisterChange()$/;"	f	class:GlobalStateMachine
+onStateMachineRegisterChange	global_state_machine.cpp	/^void GlobalStateMachine::onStateMachineRegisterChange()$/;"	f	class:GlobalStateMachine
+onTimeout	block_request.cpp	/^void BlockRequest::onTimeout()$/;"	f	class:BlockRequest
+onTimeout	card_scanner.cpp	/^void CardScanner::onTimeout()$/;"	f	class:CardScanner
+onTimeout	communicator.cpp	/^void Communicator::onTimeout()$/;"	f	class:Communicator
+onTimeout	register_request.cpp	/^void RegisterRequest::onTimeout()$/;"	f	class:RegisterRequest
+onWriteError	register.cpp	/^void Register::onWriteError(RegisterRequest*, request_error_t errorCode)$/;"	f	class:Register
+parameters	parameter_set.h	/^    QMap<QString, Parameter *> parameters; \/\/ Todo: move to private and provide iterator$/;"	m	class:ParameterSet
+parameters	parameter_set.h	/^    QVector<Parameter> parameters;$/;"	m	struct:ParameterDefinitions
+pollEnabled	register_poll.h	/^    bool pollEnabled;$/;"	m	class:RegisterPoll
+pollInterval	register_poll.h	/^    int pollInterval;$/;"	m	class:RegisterPoll
+pollTimer	register_poll.h	/^    QTimer* pollTimer;$/;"	m	class:RegisterPoll
+processHead	communicator.cpp	/^void Communicator::processHead()$/;"	f	class:Communicator
+queueRequest	communicator.cpp	/^void Communicator::queueRequest(SomeRequest request)$/;"	f	class:Communicator
+read	block.cpp	/^void Block::read()$/;"	f	class:Block
+read	register.cpp	/^void Register::read()$/;"	f	class:Register
+readAction	block_request_machine.cpp	/^SomeRequest BlockRequestMachine::readAction()$/;"	f	class:BlockRequestMachine
+readReply	register_poll.cpp	/^void RegisterPoll::readReply()$/;"	f	class:RegisterPoll
+readTransition	block_request_machine.cpp	/^void BlockRequestMachine::readTransition(SomeRequest request)$/;"	f	class:BlockRequestMachine
+reconnect	communicator.cpp	/^void Communicator::reconnect()$/;"	f	class:Communicator
+registerRequestDelete	block_request_machine.cpp	/^void BlockRequestMachine::registerRequestDelete(RegisterRequest *request)$/;"	f	class:BlockRequestMachine
+registerRequestDone	block_request_machine.cpp	/^void BlockRequestMachine::registerRequestDone(RegisterRequest *request)$/;"	f	class:BlockRequestMachine
+registerRequestError	block_request_machine.cpp	/^void BlockRequestMachine::registerRequestError(RegisterRequest *, request_error_t errCode)$/;"	f	class:BlockRequestMachine
+register_	register_poll.h	/^    Register* register_;$/;"	m	class:RegisterPoll
+registersByAddress	registers_map.h	/^    QMap<uint16_t, Register*> registersByAddress;$/;"	m	struct:RegistersMap
+registersByName	registers_map.h	/^    QMap<QString, Register*> registersByName;$/;"	m	struct:RegistersMap
+remainingBytes	block_request.cpp	/^uint32_t BlockRequest::remainingBytes() const$/;"	f	class:BlockRequest
+remainingBytes	register_request.cpp	/^uint32_t RegisterRequest::remainingBytes() const$/;"	f	class:RegisterRequest
+request	request.h	/^        RegisterRequest* request;$/;"	m	union:SomeRequest::__anon4
+requestType	block_request.h	/^    BlockRequestType requestType() const { return this->m_requestType; }$/;"	f	class:BlockRequest
+requestType	register_request.h	/^    RegisterRequestType requestType() const { return this->m_requestType; }$/;"	f	class:RegisterRequest
+request_error_t	request.h	/^enum request_error_t$/;"	g
+resetInterlocks	global_state_machine.cpp	/^void GlobalStateMachine::resetInterlocks()$/;"	f	class:GlobalStateMachine
+restartTimer	register_poll.cpp	/^void RegisterPoll::restartTimer()$/;"	f	class:RegisterPoll
+saveToBlock	parameter_set.cpp	/^void ParameterSet::saveToBlock(Block *block)$/;"	f	class:ParameterSet
+saveToFile	parameter_set.cpp	/^void ParameterSet::saveToFile(QString filepath)$/;"	f	class:ParameterSet
+scan	card_scanner.cpp	/^void CardScanner::scan(QNetworkInterface interface)$/;"	f	class:CardScanner
+sendCommand	global_state_machine.cpp	/^void GlobalStateMachine::sendCommand(command_t command)$/;"	f	class:GlobalStateMachine
+setData	block_request.cpp	/^void BlockRequest::setData(QByteArray data)$/;"	f	class:BlockRequest
+setData	block_request_machine.h	/^    void setData(QByteArray data) { this->m_data = data; }$/;"	f	class:BlockRequestMachine
+setData	register_request.cpp	/^void RegisterRequest::setData(float value)$/;"	f	class:RegisterRequest
+setData	register_request.cpp	/^void RegisterRequest::setData(int32_t value)$/;"	f	class:RegisterRequest
+setData	register_request.cpp	/^void RegisterRequest::setData(uint32_t value)$/;"	f	class:RegisterRequest
+setState	global_state_machine.cpp	/^void GlobalStateMachine::setState(global_state_t state)$/;"	f	class:GlobalStateMachine
+showAsHex	register.h	/^    bool showAsHex;$/;"	m	class:Register
+timeout	request.h	/^    int timeout() const { return m_timeout; }$/;"	f	struct:SomeRequest
+toString	register.cpp	/^QString Register::toString() const$/;"	f	class:Register
+type	register.h	/^    RegisterType type() const { return this->m_type; }$/;"	f	class:Register
+type	request.h	/^    SomeRequestType type() const { return m_requestType; }$/;"	f	struct:SomeRequest
+uint16_t	register_request.h	/^enum RegisterRequestType : uint16_t$/;"	g
+uint8_t	block_request.h	/^enum BlockRequestType : uint8_t$/;"	g
+uint8_t	block_request_machine.h	/^enum BlockRequestReadState : uint8_t$/;"	g
+uint8_t	block_request_machine.h	/^enum BlockRequestWriteState : uint8_t$/;"	g
+uintVal	register.h	/^    uint32_t uintVal() const { return this->m_uint; }$/;"	f	class:Register
+uintVal	register_request.h	/^    uint32_t uintVal() const { return this->m_uint; }$/;"	f	class:RegisterRequest
+valid	register.h	/^    bool valid() const { return this->m_valid; }$/;"	f	class:Register
+write	block.cpp	/^void Block::write(QByteArray data)$/;"	f	class:Block
+write	register.cpp	/^void Register::write(float value)$/;"	f	class:Register
+write	register.cpp	/^void Register::write(int32_t value)$/;"	f	class:Register
+write	register.cpp	/^void Register::write(uint32_t value)$/;"	f	class:Register
+writeAction	block_request_machine.cpp	/^SomeRequest BlockRequestMachine::writeAction()$/;"	f	class:BlockRequestMachine
+writeTransition	block_request_machine.cpp	/^void BlockRequestMachine::writeTransition(SomeRequest request)$/;"	f	class:BlockRequestMachine
+~Block	block.cpp	/^Block::~Block() {}$/;"	f	class:Block
+~BlocksMap	blocks_map.cpp	/^BlocksMap::~BlocksMap()$/;"	f	class:BlocksMap
+~CardScanner	card_scanner.cpp	/^CardScanner::~CardScanner()$/;"	f	class:CardScanner
+~FaultsMap	faults_map.cpp	/^FaultsMap::~FaultsMap()$/;"	f	class:FaultsMap
+~ParameterSet	parameter_set.cpp	/^ParameterSet::~ParameterSet()$/;"	f	class:ParameterSet
+~RegistersMap	registers_map.cpp	/^RegistersMap::~RegistersMap()$/;"	f	class:RegistersMap

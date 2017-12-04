@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DPC_FAULTS_WINDOW</class>
+ <widget class="QDialog" name="DPC_FAULTS_WINDOW">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>433</width>
+    <height>259</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DPC Faults</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>199</width>
+     <height>239</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Fast Interlocks</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblILOADInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_1">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>PULS Power Supply</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>DCCT Interlock</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="lblMAGNETInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblPCOInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblDCCTInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="label_7">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>dI/dt</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="lblESTOPInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="lbldIdtInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lblVMONInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLabel" name="label_8">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Magnet Interlock</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>PCO Fault</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lblIEARTHInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblPULSInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLabel" name="label_9">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Equipement Fast Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>IEARTH Fault</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_4">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>VMON Fault</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="label_5">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>ILOAD Fault</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>10</y>
+     <width>201</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Slow Interlocks</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblTEMPERATUREInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblERRORInterlockLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_10">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>I Error Interlock</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_11">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>IDAC Temperature</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>90</y>
+     <width>201</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Warnings</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblTTYTimeOutWarningLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_12">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Serial Comm. Timeout</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_13">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>dI/dt Exeeded</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lbldIdtWarningLED">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../resources.qrc">:/resources/images/red-off.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

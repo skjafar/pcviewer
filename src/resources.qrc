@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/images/red-on.png</file>
+        <file>resources/images/red-off.png</file>
+        <file>resources/images/green-on.png</file>
+        <file>resources/images/green-off.png</file>
+        <file>resources/images/arrow-down.png</file>
+        <file>resources/images/arrow-left.png</file>
+        <file>resources/images/arrow-right.png</file>
+        <file>resources/images/arrow-up.png</file>
+        <file>resources/images/horizontal.png</file>
+        <file>resources/images/vertical.png</file>
+        <file>resources/images/scan.png</file>
+        <file>resources/images/connect.png</file>
+        <file>resources/images/ac.png</file>
+        <file>resources/images/interlock.png</file>
+        <file>resources/images/off.png</file>
+        <file>resources/images/pause.png</file>
+        <file>resources/images/play.png</file>
+        <file>resources/images/reset.png</file>
+        <file>resources/images/resume.png</file>
+        <file>resources/images/standby.png</file>
+        <file>resources/images/stop.png</file>
+        <file>resources/images/dc.png</file>
+        <file>resources/images/settings.png</file>
+        <file>resources/images/download.png</file>
+        <file>resources/images/upload.png</file>
+        <file>resources/images/plot.png</file>
+        <file>resources/images/registers.png</file>
+        <file>resources/images/logger.png</file>
+        <file>resources/images/clear.png</file>
+        <file>resources/images/add.png</file>
+        <file>resources/images/remove.png</file>
+        <file>resources/images/pcviewer.ico</file>
+        <file>resources/images/pcviewer.png</file>
+        <file>resources/images/save.png</file>
+        <file>resources/images/restart.png</file>
+        <file>resources/images/skip.png</file>
+    </qresource>
+</RCC>
