@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>693</width>
-    <height>334</height>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -588,7 +588,7 @@ QGroupBox::title
      <x>0</x>
      <y>0</y>
      <width>693</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSettings">

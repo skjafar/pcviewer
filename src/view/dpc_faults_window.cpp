@@ -10,7 +10,7 @@ DPC_FAULTS_WINDOW::DPC_FAULTS_WINDOW(RegistersMap* registers, QWidget *parent) :
     Faults_register->getPoller(this)->enablePoll(true);
     connect(Faults_register, SIGNAL(onChange()), this, SLOT(onDPCFaultsChanged()));
 
-    ui->setupUi(this);
+    //ui->setupUi(this);
     Warnings_register = registers->get(WARNINGS_REGISTER_NAME);
     Warnings_register->getPoller(this)->enablePoll(true);
     connect(Warnings_register, SIGNAL(onChange()), this, SLOT(onDPCWarningsChanged()));
@@ -28,47 +28,58 @@ void DPC_FAULTS_WINDOW::onDPCFaultsChanged()
     if (Faults_register->valid())
     {
         //Fast Faults
+
         if (Faults_register->uintVal() & 0x00000001)
-            ui->lblPULSInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblPULSInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000002)
-            ui->lblDCCTInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblDCCTInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000004)
-            ui->lblPCOInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblPCOInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000008)
-            ui->lblVMONInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblVMONInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000010)
-            ui->lblILOADInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblILOADInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000020)
-            ui->lblIEARTHInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lblIEARTHInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000040)
-            ui->lbldIdtInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
-        else
-            ui->lbldIdtInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
-
-        if (Faults_register->uintVal() & 0x00000080)
             ui->lblMAGNETInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
         else
             ui->lblMAGNETInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
 
+        if (Faults_register->uintVal() & 0x00000002)
+            ui->lblDCCTAInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblDCCTAInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000004)
+            ui->lblDCCTBInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblDCCTBInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000008)
+            ui->lblPCOInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblPCOInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000010)
+            ui->lblVMONInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblVMONInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000020)
+            ui->lblILOADInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblILOADInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000040)
+            ui->lblIEARTHInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblIEARTHInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000080)
+            ui->lbldIdtInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lbldIdtInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
         if (Faults_register->uintVal() & 0x00000100)
+            ui->lblLOCALInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblLOCALInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000200)
+            ui->lblWATCHDOGInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblWATCHDOGInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000400)
             ui->lblESTOPInterlockLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
         else
             ui->lblESTOPInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
@@ -96,9 +107,24 @@ void DPC_FAULTS_WINDOW::onDPCWarningsChanged()
         else
             ui->lblTTYTimeOutWarningLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
 
+        if (Faults_register->uintVal() & 0x00000002)
+            ui->lblMISOFLOATWarningLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblMISOFLOATWarningLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
         if (Faults_register->uintVal() & 0x00000004)
             ui->lbldIdtWarningLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
         else
             ui->lbldIdtWarningLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000008)
+            ui->lblRAMPWarningLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblRAMPWarningLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        if (Faults_register->uintVal() & 0x00000010)
+            ui->lblPULSWarningLED->setPixmap(QPixmap(":/resources/images/red-on.png"));
+        else
+            ui->lblPULSWarningLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
     }
 }
