@@ -63,13 +63,6 @@ QGroupBox::title
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="lblUnits">
-         <property name="text">
-          <string>A</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLineEdit" name="txtReferenceCurrent">
          <property name="text">
           <string/>

@@ -137,7 +137,7 @@ void MainWindow::onWriteEnableChanged()
 void MainWindow::onReferenceCurrentChanged()
 {
     if (m_referenceCurrentRegister->valid())
-        ui->lblReferenceCurrent->setText(QString::number(m_referenceCurrentRegister->floatVal(), 'f', 3) + " A");
+        ui->lblReferenceCurrent->setText(QString::number(m_referenceCurrentRegister->floatVal(), 'f', 3) + ((m_globalStateMachine->currentState() == GLOBAL_STATE_OPENLOOP) ? " V" : " A"));
     else
         ui->lblReferenceCurrent->setText("N/A");
 }
