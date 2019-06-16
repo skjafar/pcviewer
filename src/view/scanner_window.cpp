@@ -6,7 +6,7 @@
 
 #include "data/data.h"
 
-ScannerWindow::ScannerWindow(QWidget *parent) :
+ScannerWindow::ScannerWindow(DevicesMap *devicesMap, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ScannerWindow)
 {
@@ -22,11 +22,12 @@ ScannerWindow::ScannerWindow(QWidget *parent) :
         }
     }
 
+    m_devices = devicesMap;
     m_scanner = new CardScanner(this);
-    connect(m_scanner, SIGNAL(onCardFound(QString)), this, SLOT(onCardFound(QString)));
+    connect(m_scanner, SIGNAL(onCardFound(QString, uint32_t)), this, SLOT(onCardFound(QString, uint32_t)));
     connect(m_scanner, SIGNAL(onScanDone()), this, SLOT(onScanDone()));
 
-    if (CONNECT_AUTOMATICALLY)
+    if (SEARCH_AUTOMATICALLY)
     {
         QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
         foreach (QNetworkInterface interface, interfaces)
@@ -49,13 +50,18 @@ void ScannerWindow::on_cmbInterfaces_currentIndexChanged(int index)
 
 void ScannerWindow::on_btnConnect_clicked()
 {
+    QString IP;
+    QStringList words;
+
     if (ui->txtIP->text().isEmpty())
     {
-        QMessageBox::warning(this, "Connect", "An IP must be specified before connecting.");
+        QMessageBox::warning(this, "Connect", "A Device must be specified before connecting.");
         return;
     }
 
-    emit connectTo(ui->txtIP->text());
+    words = ui->txtIP->text().split(" ");
+    IP = words.value(0);
+    emit connectTo(IP);
 }
 
 void ScannerWindow::connectTo(QString IP)
@@ -64,18 +70,25 @@ void ScannerWindow::connectTo(QString IP)
     emit done(QDialog::Accepted);
 }
 
-void ScannerWindow::onCardFound(QString IP)
+void ScannerWindow::onCardFound(QString IP, uint32_t ID)
 {
-    ui->lstCards->addItem(IP);
+    QString deviceName = m_devices->get(ID);
+    ui->lstCards->addItem(IP + " " + deviceName);
 }
 
 void ScannerWindow::onScanDone()
 {
+    QString IP;
+    QStringList words;
     ui->btnScan->setEnabled(true);
     ui->btnScan->setText("Scan");
 
     if (CONNECT_AUTOMATICALLY && ui->lstCards->count() == 1)
-        emit connectTo(ui->lstCards->item(0)->text());
+    {
+        words = ui->lstCards->item(0)->text().split(" ");
+        IP = words.value(0);
+        emit connectTo(IP);
+    }
 }
 
 void ScannerWindow::on_btnScan_clicked()

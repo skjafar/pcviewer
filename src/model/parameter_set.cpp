@@ -110,9 +110,8 @@ bool ParameterSet::loadFromFile(QString filepath)
             }
             else if (parameter->m_type == PARAMETER_TYPE_FLOATING)
             {
-                parameter->m_float = fields.at(1).trimmed().toFloat();
-                //long temp = fields.at(1).trimmed().toLong();
-                //parameter->m_float= *(float *)&temp;
+                uint temp = fields.at(1).trimmed().toUInt();
+                parameter->m_float= *(reinterpret_cast<float *>(&temp));
             }
         }
         else
@@ -144,7 +143,7 @@ void ParameterSet::saveToFile(QString filepath)
         {
             stream << QString::number(parameter->m_int);
         }
-        else if (parameter->m_type == PARAMETER_TYPE_FLOATING) // never reached because this is handled with the first if statement above to comly with CSS pf files
+        else if (parameter->m_type == PARAMETER_TYPE_FLOATING) // never reached because this is handled with the first if statement above to comply with CSS pf files
         {
             stream << QString::number(parameter->m_float);
         }

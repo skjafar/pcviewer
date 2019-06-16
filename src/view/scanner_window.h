@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QString>
+#include "model/devices_map.h"
 #include "model/card_scanner.h"
 
 namespace Ui {
@@ -14,12 +15,12 @@ class ScannerWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit ScannerWindow(QWidget *parent = 0);
+    explicit ScannerWindow(DevicesMap *devicesMap, QWidget *parent = 0);
     ~ScannerWindow();
     QString IP;
 
 private slots:
-    void onCardFound(QString IP);
+    void onCardFound(QString IP, uint32_t ID);
     void onScanDone();
     void connectTo(QString IP);
 
@@ -32,6 +33,7 @@ private slots:
 private:
     Ui::ScannerWindow *ui;
     CardScanner *m_scanner;
+    DevicesMap *m_devices;
 };
 
 #endif // SCANNER_WINDOW_H

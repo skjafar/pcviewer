@@ -20,9 +20,9 @@
 #include "model/register_request.h"
 #include "data/data.h"
 
-MainWindow::MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *faults, ParameterDefinitions *parameterSetDefinitions, QWidget *parent) :
+MainWindow::MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *faults, DevicesMap *devices, ParameterDefinitions *parameterSetDefinitions, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow), m_registers(registers), m_blocks(blocks), m_faults(faults), m_parameterSetDefinitions(parameterSetDefinitions)
+    ui(new Ui::MainWindow), m_registers(registers), m_blocks(blocks), m_faults(faults), m_devices(devices), m_parameterSetDefinitions(parameterSetDefinitions)
 {
     ui->setupUi(this);
 
@@ -273,6 +273,25 @@ void MainWindow::onStateChanged()
         ui->lblInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
 
         ui->lblState->setText("OPENLOOP");
+        break;
+    case GLOBAL_STATE_REPLY:
+        ui->btnOff->setChecked(true);
+        ui->btnOff->setEnabled(true);
+
+        ui->btnStandby->setChecked(true);
+        ui->btnStandby->setEnabled(true);
+
+        ui->btnON->setChecked(true);
+        ui->btnON->setEnabled(true);
+
+        ui->btnOpenloop->setChecked(true);
+        ui->btnOpenloop->setEnabled(true);
+
+        ui->btnReset->setEnabled(true);
+        ui->btnSendInterlock->setEnabled(true);
+        ui->lblInterlockLED->setPixmap(QPixmap(":/resources/images/red-off.png"));
+
+        ui->lblState->setText("REPLY");
         break;
     default:
         qWarning("Reached unhandled state (state = %d)", m_globalStateMachine->currentState());
@@ -560,13 +579,9 @@ void MainWindow::on_actionTune_triggered()
     window->insertWidget(widget);
     widget 	= 	new RegisterWidget	(m_registers, m_registers->get("I2V_GAIN"), this);
     window->insertWidget(widget);
-    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("I2V_OFFSET_ERROR"), this);
+    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("OFFSET_ERROR"), this);
     window->insertWidget(widget);
-    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("I2V_GAIN_ERROR"), this);
-    window->insertWidget(widget);
-    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("DAC_OFFSET_ERROR"), this);
-    window->insertWidget(widget);
-    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("DAC_GAIN_ERROR"), this);
+    widget 	= 	new RegisterWidget	(m_registers, m_registers->get("GAIN_ERROR"), this);
     window->insertWidget(widget);
     widget 	= 	new RegisterWidget	(m_registers, m_registers->get("MAX_IREF"), this);
     window->insertWidget(widget);
@@ -798,22 +813,23 @@ void MainWindow::on_comboMode_currentIndexChanged(const QString &arg1)
 //Sofian
 void MainWindow::onIDChanged()
 {
+    uint32_t DPC_CC_ID = m_DPC_CC_IDRegister->intVal();
     foreach (QWidget *widget, QApplication::allWidgets())
     {
         if (widget->objectName() == "MainWindow")
-        widget->setWindowTitle("Main Control - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("Main Control - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if (widget->objectName() == "FaultsWindow")
-        widget->setWindowTitle("System Faults - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("System Faults - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if (widget->objectName() == "PlotterWindow")
-        widget->setWindowTitle("Plotter - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("Plotter - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if (widget->objectName() == "LoggerWindow")
-        widget->setWindowTitle("Logger - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("Logger - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if (widget->objectName() == "RegistersWindow")
-        widget->setWindowTitle("Raw Registers Control - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("Raw Registers Control - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if (widget->objectName() == "WaveformsWindow")
-        widget->setWindowTitle("Waveforms - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("Waveforms - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
         else if  (widget->objectName() == "DPC_FAULTS_WINDOW")
-        widget->setWindowTitle("DPC Faults - DPC_CC_ID:" + QString::number(m_DPC_CC_IDRegister->intVal()));
+        widget->setWindowTitle("DPC Faults - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
     }
 }
 

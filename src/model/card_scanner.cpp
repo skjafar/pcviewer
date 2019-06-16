@@ -5,7 +5,7 @@ CardScanner::CardScanner(QObject *parent) : QObject(parent)
 {
     m_socket = new QUdpSocket(this);
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(onDataReceivedUDP()));
-    m_socket->bind(QHostAddress::Any, 7756);
+    m_socket->bind(QHostAddress::AnyIPv4, 7756);
 
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
@@ -25,7 +25,7 @@ void CardScanner::scan(QNetworkInterface interface)
     char testDatagram[10];
     uint16_t status  = 0x0000; // raw
     uint16_t type    = 0x0001; // read
-    uint16_t address = 0x4022; // test register
+    uint16_t address = DPC_CC_ID_REGISTER; // DPC_CC_ID Register
     uint32_t data    = 0x00000000; // data
 
     memcpy(testDatagram + 0, &status , 2);
@@ -48,14 +48,19 @@ void CardScanner::onDataReceivedUDP()
     {
         QHostAddress sender;
         quint16 senderPort;
-
+        uint32_t DPC_CC_ID;
         char buffer[128];
+
         qint64 readSize = m_socket->readDatagram(buffer, sizeof(buffer), &sender, &senderPort);
+
         if (readSize == 10)
         {
-            uint16_t address = 0x4022;
+            uint16_t address = DPC_CC_ID_REGISTER;
             if (memcmp(buffer + 4, &address, 2) == 0)
-                emit onCardFound(sender.toString());
+            {
+                memcpy(&DPC_CC_ID, buffer + 6, 4);
+                emit onCardFound(sender.toString(), DPC_CC_ID);
+            }
         }
     }
 }

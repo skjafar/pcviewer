@@ -5,6 +5,6 @@
 #include "stdint.h"
 
 QColor getRandomColor();
-QColor getSequentialColor(uint8_t index);
+QColor getSequentialColor(int index);
 
 #endif // COMMON_H

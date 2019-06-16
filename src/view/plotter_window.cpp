@@ -21,10 +21,15 @@ PlotterWindow::PlotterWindow(RegistersMap* registers, QWidget *parent) :
     //ui->plot->legend->setVisible(true);
 
     m_zeroTime = QTime::currentTime();
+    graphsTimeSpan = ui->txtTimeSpan->text().toDouble();
 
-    connect(ui->optZero, SIGNAL(toggled(bool)), this, SLOT(manualUpdateAxis()));
-    connect(ui->optCentered, SIGNAL(toggled(bool)), this, SLOT(manualUpdateAxis()));
-    connect(ui->sliUnits, SIGNAL(valueChanged(int)), this, SLOT(manualUpdateAxis()));
+    ui->txtPlotLower->setValidator(doubleValidator);
+    ui->txtPlotUpper->setValidator(doubleValidator);
+    ui->txtTimeSpan->setValidator(doubleValidator);
+
+    connect(ui->txtPlotUpper, SIGNAL(returnPressed()), this, SLOT(manualUpdateAxis()));
+    connect(ui->txtPlotLower, SIGNAL(returnPressed()), this, SLOT(manualUpdateAxis()));
+    connect(ui->txtTimeSpan, SIGNAL(returnPressed()(const QString &)), this, SLOT(on_txtTimeSpan_returnPressed()));
 
     QMap<uint16_t, Register*>::const_iterator iterator;
     for (iterator = m_registers->registersByAddress.begin(); iterator != m_registers->registersByAddress.end(); iterator++)
@@ -32,6 +37,7 @@ PlotterWindow::PlotterWindow(RegistersMap* registers, QWidget *parent) :
         ui->cmbRegisters->addItem(iterator.value()->name(), iterator.key());
     }
 
+    ui->cmbRegisters->setCurrentText("ILOAD");
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(addGraph()));
     connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeGraph()));
 }
@@ -75,21 +81,20 @@ void PlotterWindow::onGraphUpdated()
     if (m_paused) return;
 
     double sec = m_zeroTime.msecsTo(QTime::currentTime()) / 1000.0;
-    double timeSpan = ui->txtTimeSpan->text().toFloat();
 
     if (ui->optAutomatic->isChecked())
         ui->plot->rescaleAxes();        
-    ui->plot->xAxis->setRange(sec-timeSpan, sec);
+    ui->plot->xAxis->setRange(sec - graphsTimeSpan, sec);
     ui->plot->replot();
 }
 
-WaveformGraph::WaveformGraph(QCPGraph *graph, Register *register_, QTime zeroTime, uint8_t index, bool *paused, double xTime,QWidget *parent) :
+WaveformGraph::WaveformGraph(QCPGraph *graph, Register *register_, QTime zeroTime, int index, bool *paused, double timeSpan,QWidget *parent) :
     QObject(parent),
     m_graph(graph),
     m_register(register_),
     m_zeroTime(zeroTime),
     m_paused(paused),
-    displayTime(xTime)
+    graphTimeSpan(timeSpan)
 {
     graph->setName(register_->name());
     graph->setPen(QPen(getSequentialColor(index)));
@@ -103,12 +108,10 @@ void WaveformGraph::addPoint()
     if (m_register->valid())
     {
         double sec = m_zeroTime.msecsTo(QTime::currentTime()) / 1000.0;
-        //double timeSpan = this->ui->txtTimeSpan->text().toFloat();
 
         if (!*m_paused)
         {
-            //m_graph->removeDataBefore(sec - ((timeSpan > 0)? timeSpan : displayTime));
-            m_graph->removeDataBefore(sec - DURATION_S);
+            m_graph->removeDataBefore(sec - graphTimeSpan);
         }
 
         m_graph->addData(sec, m_register->type() == REGISTER_TYPE_FLOATING ? m_register->floatVal() : m_register->intVal());
@@ -126,27 +129,22 @@ void WaveformGraph::removeGraph()
     m_graph->clearData();
 }
 
+void WaveformGraph::setTimeSpan(double timeSpan)
+{
+    graphTimeSpan = timeSpan;
+}
+
 WaveformGraph::~WaveformGraph() {}
 
 void PlotterWindow::on_optManual_toggled(bool checked)
 {
-    ui->optZero->setEnabled(checked);
-    ui->optCentered->setEnabled(checked);
-    ui->sliUnits->setEnabled(checked);
-
     if (checked)
     {
-        double max = qMax<double>(ui->plot->yAxis->range().upper, -ui->plot->yAxis->range().lower);
-        if (ui->plot->yAxis->range().lower < 0)
-        {
-            ui->sliUnits->setValue((int) max * 2);
-            ui->optCentered->setChecked(true);
-        }
-        else
-        {
-            ui->sliUnits->setValue((int) max);
-            ui->optZero->setChecked(true);
-        }
+        double max = ui->plot->yAxis->range().upper;
+        double min = ui->plot->yAxis->range().lower;
+        ui->txtPlotUpper->setText(QString::number(max, 'f', 3));
+        ui->txtPlotLower->setText(QString::number(min, 'f', 3));
+
         this->manualUpdateAxis();
     }
 }
@@ -154,22 +152,22 @@ void PlotterWindow::on_optManual_toggled(bool checked)
 
 void PlotterWindow::manualUpdateAxis()
 {
-    double upper = ui->optZero->isChecked() ? ui->sliUnits->value() : ui->sliUnits->value() / 2.0;
-    double lower = ui->optZero->isChecked() ? 0 : -upper;
+    double upper = ui->txtPlotUpper->text().toDouble();
+    double lower = ui->txtPlotLower->text().toDouble();
+
+
 
     ui->plot->yAxis->setRange(lower, upper);
     ui->plot->replot();
 
-    ui->lblRange->setText("Range (" + QString::number(lower, 'f', 1) + " - " + QString::number(upper, 'f', 1) + ")");
 }
 
 void PlotterWindow::addGraph(Register *register_)
 {
     if (m_graphs.contains(register_)) return;
 
-    double timeSpan = ui->txtTimeSpan->text().toFloat();
-    uint8_t index = ui->plot->graphCount();
-    WaveformGraph *graph = new WaveformGraph(ui->plot->addGraph(ui->plot->xAxis, ui->plot->yAxis), register_, m_zeroTime, index, &m_paused, timeSpan, this);
+    int index = ui->plot->graphCount();
+    WaveformGraph *graph = new WaveformGraph(ui->plot->addGraph(ui->plot->xAxis, ui->plot->yAxis), register_, m_zeroTime, index, &m_paused, graphsTimeSpan, this);
     connect(graph, SIGNAL(onGraphUpdated()), this, SLOT(onGraphUpdated()));
 
     QListWidgetItem *item = new QListWidgetItem(register_->name());
@@ -244,6 +242,11 @@ void PlotterWindow::on_btnPause_toggled(bool checked)
 
 void PlotterWindow::on_txtTimeSpan_returnPressed()
 {
+    graphsTimeSpan = ui->txtTimeSpan->text().toDouble();
+    auto lastGraph = m_graphs.cend();
+    for (auto graph = m_graphs.cbegin(); graph != lastGraph; ++graph)
+    {
+        graph->first->setTimeSpan(graphsTimeSpan);
+    }
     onGraphUpdated();
 }
-

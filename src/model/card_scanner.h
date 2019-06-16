@@ -15,7 +15,7 @@ public:
     ~CardScanner();
 
 signals:
-    void onCardFound(QString IP);
+    void onCardFound(QString IP, uint32_t ID);
     void onScanDone();
 
 public slots:

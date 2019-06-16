@@ -10,14 +10,18 @@
 #include "model/registers_map.h"
 #include "model/parameter_set.h"
 #include "model/faults_map.h"
+#include "model/devices_map.h"
 #include "model/communicator.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     qsrand(QTime::currentTime().msec());
+    DevicesMap devices;
+    QString devicesMapFile = QApplication::applicationDirPath() + "/" + DEVICES_FILE;
+    devices.loadFromFile(devicesMapFile);                   //read file with devices binding to IPs if available,
 
-    ScannerWindow scanner;
+    ScannerWindow scanner(&devices);
     if (scanner.exec() != QDialog::Accepted) return 0;
 
     Communicator communicator(scanner.IP, DEFAULT_CONTROLLER_PORT);
@@ -34,7 +38,7 @@ int main(int argc, char *argv[])
 
     if (registers.loadFromFile(registersMapFile) && blocks.loadFromFile(blocksMapFile) && faults.loadFromFile(faultsMapFile) && parameterDefinitions.loadFromFile(parametersMapFile))
     {
-        MainWindow window(&registers, &blocks, &faults, &parameterDefinitions);
+        MainWindow window(&registers, &blocks, &faults, &devices, &parameterDefinitions);
         window.show();
 
         return app.exec();

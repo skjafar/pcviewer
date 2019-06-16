@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
-    <height>377</height>
+    <width>579</width>
+    <height>313</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,24 +27,10 @@
     </item>
     <item>
      <layout class="QGridLayout" name="lytSettings">
-      <item row="1" column="1">
-       <widget class="QPushButton" name="btnAdd">
-        <property name="text">
-         <string>Add</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../resources.qrc">
-          <normaloff>:/resources/images/add.png</normaloff>:/resources/images/add.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>17</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item row="2" column="4">
        <widget class="QPushButton" name="btnSaveData">
         <property name="text">
          <string>Save Data</string>
@@ -61,24 +47,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QComboBox" name="cmbRegisters">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="btnRemove">
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnAdd">
         <property name="text">
-         <string>Remove</string>
+         <string>Add</string>
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/resources/images/remove.png</normaloff>:/resources/images/remove.png</iconset>
+          <normaloff>:/resources/images/add.png</normaloff>:/resources/images/add.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -88,7 +64,37 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="5">
+      <item row="2" column="3">
+       <widget class="QPushButton" name="btnPause">
+        <property name="text">
+         <string>Pause</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/resources/images/pause.png</normaloff>:/resources/images/pause.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>17</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QComboBox" name="cmbRegisters">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
        <widget class="QPushButton" name="btnSavePNG">
         <property name="text">
          <string>Save PNG</string>
@@ -105,57 +111,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QGroupBox" name="grpPlots">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="title">
-         <string>Plots</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item row="4" column="0" colspan="2">
-          <widget class="QListWidget" name="lstPlots">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QGroupBox" name="grpTimeSpan">
-           <property name="title">
-            <string>Time Span [s]</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
-             <widget class="QLineEdit" name="txtTimeSpan">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>50</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="3" colspan="3">
+      <item row="0" column="4" colspan="2">
        <widget class="QGroupBox" name="grpYAxis">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -190,55 +146,6 @@
            </attribute>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QRadioButton" name="optZero">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Zero</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">grpCrossPoint</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lblRange">
-           <property name="text">
-            <string>Range</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QRadioButton" name="optCentered">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Centered</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">grpCrossPoint</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lblXAxisCrossPoint">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>X Axis Cross Point</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QRadioButton" name="optAutomatic">
            <property name="text">
@@ -252,52 +159,138 @@
            </attribute>
           </widget>
          </item>
-         <item row="2" column="1" colspan="2">
-          <widget class="QSlider" name="sliUnits">
-           <property name="enabled">
-            <bool>false</bool>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lblRange">
+           <property name="text">
+            <string>Range</string>
            </property>
-           <property name="minimum">
-            <number>1</number>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="txtPlotUpper">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="maximum">
-            <number>500</number>
+           <property name="minimumSize">
+            <size>
+             <width>71</width>
+             <height>0</height>
+            </size>
            </property>
-           <property name="singleStep">
-            <number>10</number>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="txtPlotLower">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="pageStep">
-            <number>50</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBelow</enum>
+           <property name="minimumSize">
+            <size>
+             <width>71</width>
+             <height>0</height>
+            </size>
            </property>
           </widget>
          </item>
         </layout>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QPushButton" name="btnPause">
-        <property name="text">
-         <string>Pause</string>
+      <item row="0" column="3">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="icon">
-         <iconset resource="../resources.qrc">
-          <normaloff>:/resources/images/pause.png</normaloff>:/resources/images/pause.png</iconset>
-        </property>
-        <property name="iconSize">
+        <property name="minimumSize">
          <size>
-          <width>24</width>
-          <height>17</height>
+          <width>0</width>
+          <height>79</height>
          </size>
         </property>
-        <property name="checkable">
-         <bool>true</bool>
+        <property name="title">
+         <string>X Axis Settings</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,0">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblDataSpan">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Time Span [s]</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="txtTimeSpan">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>60</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="2" colspan="3">
+       <widget class="QGroupBox" name="grpPlots">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Plots</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="1">
+          <widget class="QListWidget" name="lstPlots">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btnRemove">
+           <property name="text">
+            <string>Remove</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/resources/images/remove.png</normaloff>:/resources/images/remove.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>17</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -318,7 +311,6 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="grpCrossPoint"/>
   <buttongroup name="grpScaleMode"/>
  </buttongroups>
 </ui>

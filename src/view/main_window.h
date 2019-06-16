@@ -8,6 +8,7 @@
 #include "model/registers_map.h"
 #include "model/blocks_map.h"
 #include "model/faults_map.h"
+#include "model/devices_map.h"
 #include "model/parameter_set.h"
 
 namespace Ui {
@@ -19,7 +20,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *faultsMap, ParameterDefinitions *parameterSetDefinitons, QWidget *parent = 0);
+    explicit MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *faultsMap, DevicesMap *devicesMap, ParameterDefinitions *parameterSetDefinitons, QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
@@ -85,6 +86,7 @@ private:
     RegistersMap *m_registers;
     BlocksMap *m_blocks;
     FaultsMap *m_faults;
+    DevicesMap *m_devices;
     ParameterDefinitions *m_parameterSetDefinitions;
 
     GlobalStateMachine *m_globalStateMachine;

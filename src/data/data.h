@@ -6,6 +6,7 @@
 #define REGISTERS_FILE "resources/registers.map"
 #define BLOCKS_FILE "resources/blocks.map"
 #define FAULTS_FILE "resources/faults.map"
+#define DEVICES_FILE "resources/devices.map"
 #define PARAMETERS_FILE "resources/parameters.map"
 
 #define GLOBAL_STATE_MACHINE_REGISTER_NAME "STATE_HANDLER"
@@ -75,7 +76,8 @@
 
 #define DEFAULT_CONTROLLER_PORT 9322
 #define CONNECT_AUTOMATICALLY true
-
+#define SEARCH_AUTOMATICALLY true
+#define DPC_CC_ID_REGISTER 0x40CC // DPC_CC_ID Register
 #define DEFAULT_POLL_INTERVAL 1000
 
 #define ETHERNET_PRIORITIZED 2

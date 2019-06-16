@@ -13,6 +13,7 @@ TEMPLATE = app
 
 SOURCES += \
     model/communicator.cpp \
+    model/devices_map.cpp \
     model/request.cpp \
     model/registers_map.cpp \
     model/poll_group.cpp \
@@ -45,6 +46,7 @@ SOURCES += \
 
 HEADERS  += \
     model/communicator.h \
+    model/devices_map.h \
     model/request.h \
     model/registers_map.h \
     model/register.h \

@@ -62,7 +62,7 @@ Register* RegistersMap::get(QString name)
     return registersByName[name];
 }
 
-Register* RegistersMap::get(uint16_t address)
+Register* RegistersMap::get(uint address)
 {
     return registersByAddress[address];
 }

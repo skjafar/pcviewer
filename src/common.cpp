@@ -11,7 +11,7 @@ QColor getRandomColor()
     return QColor::fromHsl(h, s, l);
 }
 
-QColor getSequentialColor(uint8_t index)
+QColor getSequentialColor(int index)
 {
     const uint map[] = {0, 4, 2, 1, 7, 5, 3, 6};
     uint degree = map[index % 8] * (360 / 8);

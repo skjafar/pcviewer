@@ -23,11 +23,13 @@ class WaveformGraph : public QObject
     Q_OBJECT
 
 public:
-    explicit WaveformGraph(QCPGraph *graph, Register *register_, QTime zeroTime, uint8_t index, bool *paused, double xTime, QWidget *parent = 0);
+    explicit WaveformGraph(QCPGraph *graph, Register *register_, QTime zeroTime, int index, bool *paused, double xTime, QWidget *parent = nullptr);
     ~WaveformGraph();
 
     QPen pen() const;
     void removeGraph();
+
+    void setTimeSpan(double timeSpan);
 
 signals:
     void onGraphUpdated();
@@ -41,6 +43,7 @@ private:
     QTime m_zeroTime;
     bool *m_paused;
     double displayTime;
+    double graphTimeSpan;
 
 };
 
@@ -49,10 +52,11 @@ class PlotterWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PlotterWindow(RegistersMap* registers, QWidget *parent = 0);
+    explicit PlotterWindow(RegistersMap* registers, QWidget *parent = nullptr);
     ~PlotterWindow();
 
     void closeEvent(QCloseEvent *);
+    double graphsTimeSpan;
 
 public slots:
     void addGraph(Register* register_);
@@ -69,7 +73,6 @@ private slots:
     void on_btnPause_toggled(bool checked);
     void on_btnSaveData_clicked();
     void on_btnSavePNG_clicked();
-
     void on_txtTimeSpan_returnPressed();
 
 private:
@@ -77,6 +80,7 @@ private:
     RegistersMap *m_registers;
     QMap<Register *, QPair<WaveformGraph *, QListWidgetItem *> > m_graphs;
     QTime m_zeroTime;
+    QDoubleValidator *doubleValidator = new QDoubleValidator(this);
     bool m_paused;
 };
 

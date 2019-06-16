@@ -1,0 +1,1 @@
+https://wiki.qt.io/Deploying_Windows_Applications

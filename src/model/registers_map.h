@@ -14,7 +14,7 @@ public:
     ~RegistersMap();
 
     Register* get(QString name);
-    Register* get(uint16_t address);
+    Register* get(uint address);
 
     bool loadFromFile(QString filepath);
 
