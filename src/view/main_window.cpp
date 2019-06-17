@@ -16,8 +16,10 @@
 #include "view/faults_window.h"
 #include "view/logger_window.h"
 #include "view/dpc_faults_window.h"
+#include "view/about_window.h"
 
 #include "model/register_request.h"
+#include "build_number.h"
 #include "data/data.h"
 
 MainWindow::MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *faults, DevicesMap *devices, ParameterDefinitions *parameterSetDefinitions, QWidget *parent) :
@@ -650,6 +652,13 @@ void MainWindow::on_actionFaultsShow_triggered()
     onIDChanged();
 }
 
+void MainWindow::on_actionAbout_triggered()
+{
+    AboutWindow *window = new AboutWindow(this);
+    window->show();
+    onIDChanged();
+}
+
 void MainWindow::on_actionParameterizationUpload_triggered()
 {
     QString filepath = QFileDialog::getOpenFileName(this, "Load Parameter Set From...", QString(), "Parameter File (*.pf)");
@@ -816,20 +825,32 @@ void MainWindow::onIDChanged()
     uint32_t DPC_CC_ID = m_DPC_CC_IDRegister->intVal();
     foreach (QWidget *widget, QApplication::allWidgets())
     {
+        QString tempWindowTitle = "";
+
         if (widget->objectName() == "MainWindow")
-        widget->setWindowTitle("Main Control - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = QString("%1 v%2.%3")
+                    .arg("Main Control")
+                    .arg(VERSION)
+                    .arg(BUILD_NUMBER);
         else if (widget->objectName() == "FaultsWindow")
-        widget->setWindowTitle("System Faults - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "SCE Faults";
         else if (widget->objectName() == "PlotterWindow")
-        widget->setWindowTitle("Plotter - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "Plotter";
         else if (widget->objectName() == "LoggerWindow")
-        widget->setWindowTitle("Logger - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "Logger";
         else if (widget->objectName() == "RegistersWindow")
-        widget->setWindowTitle("Raw Registers Control - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "Raw Registers Control";
         else if (widget->objectName() == "WaveformsWindow")
-        widget->setWindowTitle("Waveforms - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "Waveforms";
         else if  (widget->objectName() == "DPC_FAULTS_WINDOW")
-        widget->setWindowTitle("DPC Faults - DPC_CC_ID:" + QString::number(DPC_CC_ID) + " - " + m_devices->get(DPC_CC_ID));
+            tempWindowTitle = "DPC Faults";
+
+        if (widget->objectName() == "AboutWindow")
+            widget->setWindowTitle("About");
+        else widget->setWindowTitle(QString("%1 - DPC_CC_ID: %2 - %3")
+                                    .arg(tempWindowTitle)
+                                    .arg(DPC_CC_ID)
+                                    .arg(m_devices->get(DPC_CC_ID)));
     }
 }
 

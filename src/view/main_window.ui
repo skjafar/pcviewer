@@ -615,9 +615,27 @@ QGroupBox::title
     <addaction name="actionRestartFirmware"/>
     <addaction name="menuUpdateFirmware"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>546</x>
+      <y>100</y>
+      <width>135</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuSettings"/>
    <addaction name="menuTools"/>
    <addaction name="menuParameterization"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="stbMain"/>
   <action name="actionSettingsEnableWrites">
@@ -758,6 +776,11 @@ QGroupBox::title
    </property>
    <property name="text">
     <string>DPC Faults</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

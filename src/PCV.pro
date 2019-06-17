@@ -28,6 +28,7 @@ SOURCES += \
     model/card_scanner.cpp \
     model/faults_map.cpp \
     model/global_state_machine.cpp \
+    view/about_window.cpp \
     view/register_widget.cpp \
     view/registers_window.cpp \
     view/qcustomplot.cpp \
@@ -61,6 +62,7 @@ HEADERS  += \
     model/card_scanner.h \
     model/faults_map.h \
     model/global_state_machine.h \
+    view/about_window.h \
     view/register_widget.h \
     view/registers_window.h \
     view/qcustomplot.h \
@@ -74,10 +76,12 @@ HEADERS  += \
     view/main_window.h \
     data/data.h \
     common.h \
+    build_number.h \
     view/dpc_faults_window.h \
     view/combined_waveform_widget.h
 
 FORMS    += \
+    view/about_window.ui \
     view/registers_window.ui \
     view/scanner_window.ui \
     view/logger_window.ui \

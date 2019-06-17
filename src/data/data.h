@@ -1,6 +1,7 @@
 #ifndef DATA_H
 #define DATA_H
 
+#define VERSION "1.0"                 // First official release
 #define CONTROLLER_PERIOD 0.5       //the rate at which the controller runs on the controller card in ms
 #define STANDBY_CURRENT 5           //the standby default current
 #define REGISTERS_FILE "resources/registers.map"

@@ -36,6 +36,7 @@ private slots:
     void on_actionTest_triggered();
     void on_actionStates_triggered();
     void on_actionTune_triggered();
+    void on_actionAbout_triggered();
 
     void on_btnOff_clicked();
     void on_btnStandby_clicked();
