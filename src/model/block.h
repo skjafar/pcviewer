@@ -41,7 +41,6 @@ private slots:
 private:
     Communicator* m_communicator;
     RegistersMap* m_registers;
-
     QString m_name;
     uint32_t m_address;
     uint32_t m_offset;

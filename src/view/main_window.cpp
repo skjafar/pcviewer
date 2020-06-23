@@ -444,7 +444,12 @@ void MainWindow::on_actionWaveformSettings_triggered()
 void MainWindow::on_actionLoggerShow_triggered()
 {
     LoggerWindow *loggerWindow = new LoggerWindow(m_registers, this);
-    loggerWindow->addLogger(m_blocks->get("TEMPERATURE_IDAC log"), "TEMPERATURE_IDAC");
+    loggerWindow->addLogger(m_blocks->get("IREF log"), "IREF");
+    loggerWindow->addLogger(m_blocks->get("ILOAD log"), "ILOAD");
+    loggerWindow->addLogger(m_blocks->get("VMON log"), "VMON");
+    loggerWindow->addLogger(m_blocks->get("FAULTS log"), "FAULTS");
+    loggerWindow->addLogger(m_blocks->get("PCO_FAULTS log"), "PCO_FAULTS");
+    loggerWindow->addLogger(m_blocks->get("STATE log"), "STATE");
     loggerWindow->show();
     onIDChanged();
 }

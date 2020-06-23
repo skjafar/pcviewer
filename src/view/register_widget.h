@@ -31,6 +31,7 @@ private slots:
     void onError(request_error_t);
 
     void on_txtValue_returnPressed();
+    void on_txtAddress_ReturnPressed();
     void on_btnPlot_clicked();
 
 private:

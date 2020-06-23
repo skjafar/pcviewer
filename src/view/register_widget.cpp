@@ -8,12 +8,14 @@ RegisterWidget::RegisterWidget(RegistersMap* registers, QWidget* parent) :
 
     {
         ui->cmbRegisters->addItem("");
+        ui->txtAddress->setText("");
         QMap<uint16_t, Register*>::const_iterator iterator;
         for (iterator = registers->registersByAddress.begin(); iterator != registers->registersByAddress.end(); iterator++)
         {
             ui->cmbRegisters->addItem(iterator.value()->name(), iterator.key());
         }
         connect(ui->cmbRegisters, SIGNAL(currentIndexChanged(int)), this, SLOT(onAddressChange(int)));
+        connect(ui->txtAddress, SIGNAL(returnPressed()), this, SLOT(on_txtAddress_ReturnPressed()));
     }
 
     onAddressChange(0);
@@ -28,9 +30,13 @@ RegisterWidget::RegisterWidget(RegistersMap* registers, Register* reg, QWidget* 
 	QMap<uint16_t, Register*>::const_iterator iterator;
 	for (iterator = registers->registersByAddress.begin(); iterator != registers->registersByAddress.end(); iterator++)
 	{
-		ui->cmbRegisters->addItem(iterator.value()->name(), iterator.key());
+        if (iterator.value()->name() != "N/A")
+        {
+            ui->cmbRegisters->addItem(iterator.value()->name(), iterator.key());
+        }
 	}
 	connect(ui->cmbRegisters, SIGNAL(currentIndexChanged(int)), this, SLOT(onAddressChange(int)));
+    connect(ui->txtAddress, SIGNAL(returnPressed()), this, SLOT(on_txtAddress_ReturnPressed()));
 
 	int index = 1;
 	for (iterator = registers->registersByAddress.begin(); iterator != registers->registersByAddress.end(); iterator++)
@@ -66,12 +72,38 @@ void RegisterWidget::onAddressChange(int index)
     if (index > 0)
     {
         changeConnectedRegister(m_registers->get(ui->cmbRegisters->itemData(index).toUInt()));
-        ui->lblRegister->setText(QString("0x%1").arg(m_register->address(), 2, 16, QChar('0')));
+        ui->txtAddress->setText(QString("0x%1").arg(m_register->address(), 2, 16, QChar('0')));
     }
     else
     {
         changeConnectedRegister(NULL);
-        ui->lblRegister->setText("N/A");
+    }
+}
+
+void RegisterWidget::on_txtAddress_ReturnPressed()
+{
+    ui->lblValue->setText("N/A");
+
+    uint16_t lAddress = ui->txtAddress->text().toUInt(0, 16);
+
+    if (m_registers->registersByAddress.count(lAddress) > 0)
+    {
+        changeConnectedRegister(m_registers->get(lAddress));
+        int index = ui->cmbRegisters->findData(lAddress);
+
+        if (index > -1)
+        {
+            ui->cmbRegisters->setCurrentIndex(index);
+        }
+        else
+        {
+            ui->cmbRegisters->setCurrentIndex(0);
+        }
+
+    }
+    else
+    {
+        changeConnectedRegister(NULL);
     }
 }
 

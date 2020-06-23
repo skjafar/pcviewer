@@ -45,6 +45,23 @@ bool RegistersMap::loadFromFile(QString filepath)
         }
     }
 
+    for (uint16_t iAddress = 0; iAddress <= 0xCC; iAddress++)
+    {
+        if (registersByAddress.count(iAddress) == 0)
+        {
+            Register* reg = new Register(
+                communicator,
+                iAddress,
+                "N/A",
+                REGISTER_TYPE_INTEGRAL,
+                0
+            );
+
+            registersByAddress.insert(reg->address(), reg);
+            //registersByName.insert(reg->name(), reg);
+        }
+    }
+
     return true;
 }
 
