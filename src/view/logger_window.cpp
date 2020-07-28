@@ -114,7 +114,8 @@ void LoggerWindow::updateGraph()
 {
     ui->plot->clearGraphs();
     ui->plot->legend->setVisible(true);
-
+    //ui->plot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+    ui->plot->setInteractions(QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag);
     for (int i = 0; i < m_loggers.size(); i++)
     {
         if (m_data[i].size() == 0) continue;
@@ -132,7 +133,9 @@ void LoggerWindow::updateGraph()
             float key = (sample < m_index) ?
                 LOGGER_SAMPLES - (m_index - sample) :
                 sample - m_index;
-            graph->addData((key - LOGGER_SAMPLES / 2) * SAMPLE_TO_SECOND, value);
+            graph->addData((key - LOGGER_SAMPLES / 2) / SAMPLES_PER_SECOND, value);
+            //graph->addData((sample), value);
+
         }
     }
 
