@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QVector>
 
+#include "view/qcustomplot.h"
 #include "model/blocks_map.h"
 #include "model/registers_map.h"
 
@@ -30,12 +31,15 @@ private slots:
     void on_btnStart_clicked();
     void on_btnStop_clicked();
 
+    void on_btnSave_clicked();
+
 private:
     void updateGraph();
 
     Ui::LoggerWindow *ui;
     QVector<Block *> m_loggers;
     QVector<QByteArray> m_data;
+    QVector<QMap<float, float>> m_data_sorted;
     QVector<QString> m_names;
     Register *m_loggerStatusRegister;
     Register *m_logIndexRegister;

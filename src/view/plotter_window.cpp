@@ -219,10 +219,10 @@ void PlotterWindow::on_btnSaveData_clicked()
         if (!file.open(QIODevice::WriteOnly)) return;
 
         QTextStream stream(&file);
-        stream << "# Data file generated on " << QDateTime::currentDateTime().toString() << endl;
-        stream << "# " << graph->name() << endl;
-        stream << endl;
-        stream << "# Time \t Value" << endl;
+        stream << "# Data file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
+        stream << "# " << graph->name() << Qt::endl;
+        stream << Qt::endl;
+        stream << "# Time \t Value" << Qt::endl;
 
         // get data points
         QCPDataMap *data = graph->data();
@@ -230,7 +230,7 @@ void PlotterWindow::on_btnSaveData_clicked()
         for (it = data->constBegin(); it != data->constEnd(); it++)
         {
             // write to file
-            stream << QString::number(it->key) << " \t " << QString::number(it->value) << endl;
+            stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
         }
     }
 }

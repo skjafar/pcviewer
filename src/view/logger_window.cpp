@@ -73,6 +73,7 @@ void LoggerWindow::addLogger(Block *block, QString name)
     m_loggers.append(block);
     m_names.append(name);
     m_data.append(QByteArray());
+    m_data_sorted.append(QMap<float,float>());
 }
 
 void LoggerWindow::onIndexRead()
@@ -129,13 +130,14 @@ void LoggerWindow::updateGraph()
         {
             float value;
             memcpy(&value, m_data[i].constData() + sample * sizeof(float), sizeof(float));
-
             float key = (sample < m_index) ?
                 LOGGER_SAMPLES - (m_index - sample) :
                 sample - m_index;
-            graph->addData((key - LOGGER_SAMPLES / 2) / SAMPLES_PER_SECOND, value);
+            key = (key - LOGGER_SAMPLES / 2) / SAMPLES_PER_SECOND;
+            graph->addData(key, value);
             //graph->addData((sample), value);
 
+            m_data_sorted[i][key] = value;
         }
     }
 
@@ -151,4 +153,36 @@ void LoggerWindow::on_btnStart_clicked()
 void LoggerWindow::on_btnStop_clicked()
 {
     m_commandRegister->write((uint32_t) COMMAND_STOP_LOG);
+}
+
+void LoggerWindow::on_btnSave_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, "Select Folder to Save Data To");
+    if (folder.isEmpty()) return;
+;
+    // for each log
+    for (int i = 0; i < m_data_sorted.size(); i++)
+    {
+        if (m_data_sorted[i].size() == 0) continue;
+
+        // create file
+        QString filepath = QDir(folder).filePath(QDateTime::currentDateTime().toString() + "_log.dat");
+        QFile file(filepath);
+        if (!file.open(QIODevice::WriteOnly)) return;
+
+        QTextStream stream(&file);
+        stream << "# Log file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
+        stream << "# " << Qt::endl;
+        stream << Qt::endl;
+        stream << "# Time \t Value" << Qt::endl;
+
+        // get data points
+        QMap<float,float> *data = &m_data_sorted[i];
+        QMap<float,float>::ConstIterator it;
+        for (it = m_data_sorted[i].constBegin(); it != m_data_sorted[i].constEnd(); it++)
+        {
+            // write to file
+            stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
+        }
+    }
 }
