@@ -182,7 +182,7 @@ void LoggerWindow::on_btnSave_clicked()
         for (it = m_data_sorted[i].constBegin(); it != m_data_sorted[i].constEnd(); it++)
         {
             // write to file
-            stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
+            //stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
         }
     }
 }

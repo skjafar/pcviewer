@@ -211,7 +211,7 @@ void MainWindow::onStateChanged()
         ui->btnON->setEnabled(true);
 
         ui->btnOpenloop->setChecked(false);
-        ui->btnOpenloop->setEnabled(false);
+        ui->btnOpenloop->setEnabled(true);
 
         ui->btnReset->setEnabled(false);
         ui->btnSendInterlock->setEnabled(true);
@@ -262,7 +262,7 @@ void MainWindow::onStateChanged()
         ui->btnOff->setEnabled(true);
 
         ui->btnStandby->setChecked(false);
-        ui->btnStandby->setEnabled(false);
+        ui->btnStandby->setEnabled(true);
 
         ui->btnON->setChecked(false);
         ui->btnON->setEnabled(false);
