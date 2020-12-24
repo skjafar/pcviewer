@@ -110,8 +110,9 @@ bool ParameterSet::loadFromFile(QString filepath)
             }
             else if (parameter->m_type == PARAMETER_TYPE_FLOATING)
             {
-                uint temp = fields.at(1).trimmed().toUInt();
-                parameter->m_float= *(reinterpret_cast<float *>(&temp));
+                parameter->m_float = fields.at(1).trimmed().toFloat();
+                // uint temp = fields.at(1).trimmed().toUInt();
+                // parameter->m_float= *(reinterpret_cast<float *>(&temp));
             }
         }
         else

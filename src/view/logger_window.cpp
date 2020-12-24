@@ -3,6 +3,8 @@
 
 #include "data/data.h"
 #include "common.h"
+#include <vector>
+using std::vector;
 
 LoggerWindow::LoggerWindow(RegistersMap *registers, QWidget *parent) :
     QMainWindow(parent),
@@ -34,6 +36,7 @@ LoggerWindow::~LoggerWindow()
 
 void LoggerWindow::loggerStatusChanged()
 {
+    ui->plot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
     if (!m_loggerStatusRegister->valid())
     {
         ui->btnStart->setEnabled(false);
@@ -114,17 +117,54 @@ void LoggerWindow::on_btnDump_clicked()
 void LoggerWindow::updateGraph()
 {
     ui->plot->clearGraphs();
-    ui->plot->legend->setVisible(true);
+    
+    //   // create and prepare a text layout element:
+    // QCPTextElement *legendTitle = new QCPTextElement(ui->plot);
+    // legendTitle->setLayer(ui->plot->legend->layer()); // place text element on same layer as legend, or it ends up below legend
+    // legendTitle->setText("Engine Status");
+    // legendTitle->setFont(QFont("sans", 9, QFont::Bold));
+    // // then we add it to the QCPLegend (which is a subclass of QCPLayoutGrid):
+    // if (ui->plot->legend->hasElement(0, 0)) // if top cell isn't empty, insert an empty row at top
+    //     ui->plot->legend->insertRow(0);
+    // ui->plot->legend->addElement(0, 0, legendTitle); // place the text element into the empty cell
+    
+    //ui->plot->legend->setVisible(true);
     //ui->plot->yAxis->setScaleType(QCPAxis::stLogarithmic);
     ui->plot->setInteractions(QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag);
+
+    // configure axis rect:
+    vector<QCPAxisRect *> loggerAxesRects;
+    loggerAxesRects.reserve(m_loggers.size());
+
+    for (int i = 0; i < m_loggers.size(); i++)
+    {
+        // create Rect pointer for every log
+        loggerAxesRects.push_back(new QCPAxisRect(ui->plot));
+        loggerAxesRects[i]->setupFullAxesBox(true);
+        loggerAxesRects[i]->axis(QCPAxis::atRight, 0)->setTickLabels(true);
+        // add Rect pointer to plot
+        ui->plot->plotLayout()->addElement(i, 0, loggerAxesRects[i]);
+    }
+    
+    // synchronize the left and right margins of the top and bottom axis rects:
+    // move newly created axes on "axes" layer and grids on "grid" layer:
+    foreach (QCPAxisRect *rect, ui->plot->axisRects())
+    {
+        foreach (QCPAxis *axis, rect->axes())
+        {
+            axis->setLayer("axes");
+            axis->grid()->setLayer("grid");
+        }
+    }
+    
     for (int i = 0; i < m_loggers.size(); i++)
     {
         if (m_data[i].size() == 0) continue;
 
-        QCPGraph *graph = ui->plot->addGraph(ui->plot->xAxis, ui->plot->yAxis);
+        QCPGraph *graph = ui->plot->addGraph(ui->plot->axisRect(i)->axis(QCPAxis::atBottom), ui->plot->axisRect(i)->axis(QCPAxis::atLeft));
 
         graph->setName(m_names[i]);
-        graph->setPen(QPen(getSequentialColor(i)));
+        //graph->setPen(QPen(getSequentialColor(i)));
 
         for (int sample = 0; sample < LOGGER_SAMPLES; sample++)
         {
@@ -133,13 +173,16 @@ void LoggerWindow::updateGraph()
             float key = (sample < m_index) ?
                 LOGGER_SAMPLES - (m_index - sample) :
                 sample - m_index;
-            key = (key - LOGGER_SAMPLES / 2) / SAMPLES_PER_SECOND;
+            key = (key - LOGGER_SAMPLES * 3 / 4) / SAMPLES_PER_SECOND;
             graph->addData(key, value);
             //graph->addData((sample), value);
 
             m_data_sorted[i][key] = value;
         }
     }
+
+
+    //ui->plot->legend->setVisible(true);
 
     ui->plot->rescaleAxes();
     ui->plot->replot();
