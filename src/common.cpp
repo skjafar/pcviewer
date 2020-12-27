@@ -2,12 +2,13 @@
 
 #include <QtGlobal>
 #include <QTime>
+#include <QRandomGenerator>
 
 QColor getRandomColor()
 {
-    int h = qrand() % 360;
-    int s = qrand() % 56 + 200;
-    int l = qrand() % 56 + 100;
+    int h = QRandomGenerator::global()->generate() % 360;
+    int s = QRandomGenerator::global()->generate() % 56 + 200;
+    int l = QRandomGenerator::global()->generate() % 56 + 100;
     return QColor::fromHsl(h, s, l);
 }
 

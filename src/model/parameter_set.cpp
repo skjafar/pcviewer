@@ -148,7 +148,7 @@ void ParameterSet::saveToFile(QString filepath)
         {
             stream << QString::number(parameter->m_float);
         }
-        stream << endl;
+        stream << Qt::endl;
     }
 }
 

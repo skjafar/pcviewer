@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QMessageBox>
-#include <QtGlobal>
 #include <QTime>
 
 #include "view/main_window.h"
@@ -16,7 +15,6 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    qsrand(QTime::currentTime().msec());
     DevicesMap devices;
     QString devicesMapFile = QApplication::applicationDirPath() + "/" + DEVICES_FILE;
     devices.loadFromFile(devicesMapFile);                   //read file with devices binding to IPs if available,

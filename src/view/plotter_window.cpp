@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
+#include <QBrush>
 
 #include "common.h"
 
@@ -171,7 +172,8 @@ void PlotterWindow::addGraph(Register *register_)
     connect(graph, SIGNAL(onGraphUpdated()), this, SLOT(onGraphUpdated()));
 
     QListWidgetItem *item = new QListWidgetItem(register_->name());
-    item->setBackgroundColor(graph->pen().color());
+    //item->setBackgroundColor(graph->pen().color());
+    item->setBackground(QBrush(graph->pen().color()));
     ui->lstPlots->addItem(item);
 
     m_graphs[register_] = QPair<WaveformGraph *, QListWidgetItem *>(graph, item);

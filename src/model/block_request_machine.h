@@ -2,7 +2,7 @@
 #define BLOCK_REQUEST_MACHINE_H
 
 #include <QObject>
-#include <QTime>
+#include <QElapsedTimer>
 
 #include "model/block.h"
 #include "model/request.h"
@@ -81,7 +81,7 @@ private:
     Register* m_deviceOperatingStateRegister;
     Register* m_systemOperatingStateRegister;
 
-    QTime m_timer;
+    QElapsedTimer m_timer;
 };
 
 #endif // BLOCK_REQUEST_MACHINE_H
