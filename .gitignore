@@ -3,3 +3,7 @@ build-*/
 *.o
 *.pro.user.*
 *.pro.user
+*.a
+*.o
+.qmake.stash
+.qmake.cache
