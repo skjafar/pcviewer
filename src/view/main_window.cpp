@@ -28,9 +28,6 @@ MainWindow::MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *fa
 {
     ui->setupUi(this);
 
-//	// setup ID
-//    this->setWindowTitle("DPC_CC_ID " + QString::number(registers->get("DPC_CC_ID")->uintVal()));
-
     // setup toolbar
     lblPriority = new QLabel(this);
     ui->stbMain->addPermanentWidget(lblPriority);
@@ -57,13 +54,6 @@ MainWindow::MainWindow(RegistersMap *registers, BlocksMap *blocks, FaultsMap *fa
     m_referenceCurrentRegister->getPoller(this)->enablePoll(true);
     connect(m_referenceCurrentRegister, SIGNAL(onChange()), this, SLOT(onReferenceCurrentChanged()));
     onReferenceCurrentChanged();
-
-
-//    // Measurement setup
-//    m_IloadRegister = registers->get("ILOAD");
-//    m_IloadRegister->getPoller(this)->enablePoll(true);
-//    connect(m_IloadRegister, SIGNAL(onChange()), this, SLOT(onIloadChanged()));
-//    onIloadChanged();
 
     // priority setup
     m_priorityRegister = registers->get(SYSTEM_PRIORITY_REGISTER_NAME);
@@ -859,8 +849,6 @@ void MainWindow::onIDChanged()
     }
 }
 
-//Sofian
-//Sofian
 void MainWindow::onILOADChanged()
 {
     if (m_ILOADRegister->valid())

@@ -19,7 +19,6 @@ PlotterWindow::PlotterWindow(RegistersMap* registers, QWidget *parent) :
     ui->setupUi(this);
     ui->plot->xAxis->setLabel("Time");
     ui->plot->setInteractions(QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag);
-    //ui->plot->legend->setVisible(true);
 
     m_zeroTime = QTime::currentTime();
     graphsTimeSpan = ui->txtTimeSpan->text().toDouble();
@@ -172,7 +171,6 @@ void PlotterWindow::addGraph(Register *register_)
     connect(graph, SIGNAL(onGraphUpdated()), this, SLOT(onGraphUpdated()));
 
     QListWidgetItem *item = new QListWidgetItem(register_->name());
-    //item->setBackgroundColor(graph->pen().color());
     item->setBackground(QBrush(graph->pen().color()));
     ui->lstPlots->addItem(item);
 
