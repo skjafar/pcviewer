@@ -26,6 +26,9 @@ LoggerWindow::LoggerWindow(RegistersMap *registers, QWidget *parent) :
     m_commandRegister = registers->get(COMMAND_REGISTER_NAME);
     Q_ASSERT(m_commandRegister != NULL);
 
+    connect(ui->plot, SIGNAL(mouseDoubleClick(QMouseEvent *)), this, SLOT(mouse_doubleclicked(QMouseEvent *)));
+    connect(ui->plot, SIGNAL(mousePress(QMouseEvent *)), this, SLOT(mouse_clicked(QMouseEvent *)));
+    
     this->loggerStatusChanged();
 }
 
@@ -36,7 +39,6 @@ LoggerWindow::~LoggerWindow()
 
 void LoggerWindow::loggerStatusChanged()
 {
-    ui->plot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
     if (!m_loggerStatusRegister->valid())
     {
         ui->btnStart->setEnabled(false);
@@ -72,16 +74,18 @@ void LoggerWindow::loggerStatusChanged()
 
 void LoggerWindow::addLogger(Block *block, QString name)
 {
+    ui->plot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
     connect(block, SIGNAL(onReadDone(Block*,QByteArray)), this, SLOT(onDataRead(Block*,QByteArray)));
     m_loggers.append(block);
     m_names.append(name);
-    m_data.append(QByteArray());
+    m_data.append(QByteArray("/null", 1000));
     m_data_sorted.append(QMap<float,float>());
+    updateGraph();
 }
 
 void LoggerWindow::onIndexRead()
 {
-    disconnect(m_logIndexRegister, SIGNAL(onReadReply()), this, SLOT(onIndexRead()));
+    disconnect(m_logIndexRegister, SIGNAL(onReadReply()), ui->plot, SLOT(rescaleAxes()));
     m_index = m_logIndexRegister->uintVal();
 
     for (int i = 0; i < m_loggers.size(); i++)
@@ -118,24 +122,27 @@ void LoggerWindow::updateGraph()
 {
     ui->plot->clearGraphs();
     
-    //   // create and prepare a text layout element:
-    // QCPTextElement *legendTitle = new QCPTextElement(ui->plot);
-    // legendTitle->setLayer(ui->plot->legend->layer()); // place text element on same layer as legend, or it ends up below legend
-    // legendTitle->setText("Engine Status");
-    // legendTitle->setFont(QFont("sans", 9, QFont::Bold));
-    // // then we add it to the QCPLegend (which is a subclass of QCPLayoutGrid):
-    // if (ui->plot->legend->hasElement(0, 0)) // if top cell isn't empty, insert an empty row at top
-    //     ui->plot->legend->insertRow(0);
-    // ui->plot->legend->addElement(0, 0, legendTitle); // place the text element into the empty cell
-    
-    //ui->plot->legend->setVisible(true);
-    //ui->plot->yAxis->setScaleType(QCPAxis::stLogarithmic);
-    ui->plot->setInteractions(QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag);
+    // dont add to main legand
+    ui->plot->setAutoAddPlottableToLegend(false);
 
-    // configure axis rect:
+    //ui->plot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+    ui->plot->setInteractions(QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag | QCP::Interaction::iSelectPlottables);
+    //ui->plot->setSelectionRectMode(QCP::srmZoom);
+    // create axis rect:
     vector<QCPAxisRect *> loggerAxesRects;
     loggerAxesRects.reserve(m_loggers.size());
 
+    // create vector for sublegands
+    vector<QCPLegend *> subLegands;
+    subLegands.reserve(m_loggers.size());
+
+    // create a group for aligning the margins
+    QCPMarginGroup *marginGroup = new QCPMarginGroup(ui->plot);
+
+    // bring bottom and main axis rect closer together:
+    ui->plot->plotLayout()->setRowSpacing(0);
+
+    //configure axis rects and sub-legands
     for (int i = 0; i < m_loggers.size(); i++)
     {
         // create Rect pointer for every log
@@ -144,6 +151,37 @@ void LoggerWindow::updateGraph()
         loggerAxesRects[i]->axis(QCPAxis::atRight, 0)->setTickLabels(true);
         // add Rect pointer to plot
         ui->plot->plotLayout()->addElement(i, 0, loggerAxesRects[i]);
+
+        // add rect to margin group
+        ui->plot->axisRect(i)->setMarginGroup(QCP::msLeft | QCP::msRight, marginGroup);
+
+        //reduce distance between oplots
+        ui->plot->axisRect(i)->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
+        if (i == 0)
+        {
+            ui->plot->axisRect(i)->setMargins(QMargins(0, 2, 0, 0));
+        }
+        else
+        {
+            ui->plot->axisRect(i)->setMargins(QMargins(0, 0, 0, 0));
+        }
+
+        // limit scroll-wheel zoom in horiznotal plane
+        ui->plot->axisRect(i)->setRangeZoom(Qt::Horizontal);
+        
+        // limit selection zoom to vertical plane
+        ui->plot->axisRect(i)->setRangeZoomAxes(ui->plot->axisRect(i)->axis(QCPAxis::atBottom), NULL);
+
+        // interconnect x axis ranges of main and bottom axis rects:
+        connect(ui->plot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->plot->axisRect(i)->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
+        connect(ui->plot->axisRect(i)->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), ui->plot->xAxis, SLOT(setRange(QCPRange)));
+
+        //create sub-legand pointer for every plot
+        subLegands.push_back(new QCPLegend);
+        loggerAxesRects[i]->insetLayout()->addElement(subLegands[i], Qt::AlignTop | Qt::AlignRight);
+        subLegands[i]->setLayer("legend");
+        subLegands[i]->setBorderPen(QPen(Qt::black));
+        subLegands[i]->setBrush(QBrush(Qt::white));
     }
     
     // synchronize the left and right margins of the top and bottom axis rects:
@@ -159,32 +197,52 @@ void LoggerWindow::updateGraph()
     
     for (int i = 0; i < m_loggers.size(); i++)
     {
-        if (m_data[i].size() == 0) continue;
-
         QCPGraph *graph = ui->plot->addGraph(ui->plot->axisRect(i)->axis(QCPAxis::atBottom), ui->plot->axisRect(i)->axis(QCPAxis::atLeft));
-
         graph->setName(m_names[i]);
-        //graph->setPen(QPen(getSequentialColor(i)));
+        // add to sublegands
+        graph->addToLegend(subLegands[i]);
+        graph->setPen(QPen(getSequentialColor(i)));
 
+
+        //if there is no data there is no need to continue
+        if (m_data[i].size() == 0) continue;
+        
         for (int sample = 0; sample < LOGGER_SAMPLES; sample++)
         {
             float value;
             memcpy(&value, m_data[i].constData() + sample * sizeof(float), sizeof(float));
+            
+            // shift data according to current index (last stored data) in ring buffer
             float key = (sample < m_index) ?
                 LOGGER_SAMPLES - (m_index - sample) :
                 sample - m_index;
+            // event happens 3/4 on the point line, so offset accordingly, and convert index values to time
             key = (key - LOGGER_SAMPLES * 3 / 4) / SAMPLES_PER_SECOND;
             graph->addData(key, value);
-            //graph->addData((sample), value);
 
             m_data_sorted[i][key] = value;
         }
+        ui->plot->rescaleAxes();
+        double range_upper = ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->range().upper;
+        double range_lower = ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->range().lower;
+        double axisRange   = range_upper - range_lower;
+        ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->setRange(range_lower - (axisRange * 0.05), range_upper + (axisRange * 0.05));
+
     }
 
-
-    //ui->plot->legend->setVisible(true);
-
+    // automatically set range according to data
     ui->plot->rescaleAxes();
+
+    // set range over by a certain percentage
+    for (int i = 0; i < m_loggers.size(); i++)
+    {
+        double range_upper = ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->range().upper;
+        double range_lower = ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->range().lower;
+        double axisRange   = range_upper - range_lower;
+        double added_scale = 0.1;
+        ui->plot->axisRect(i)->axis(QCPAxis::atLeft)->setRange(range_lower - (axisRange * added_scale), range_upper + (axisRange * added_scale));
+    }
+    
     ui->plot->replot();
 }
 
@@ -200,32 +258,57 @@ void LoggerWindow::on_btnStop_clicked()
 
 void LoggerWindow::on_btnSave_clicked()
 {
-    QString folder = QFileDialog::getExistingDirectory(this, "Select Folder to Save Data To");
-    if (folder.isEmpty()) return;
-;
-    // for each log
-    for (int i = 0; i < m_data_sorted.size(); i++)
+    QString filepath = QFileDialog::getSaveFileName(this, "Select Folder to Save Log Data To", 
+        QDateTime::currentDateTime().toString(QString("yy-MM-dd_hh.mm")) + "_Postmortem_log.dat");
+
+    // create file
+    QFile file(filepath);
+    if (!file.open(QIODevice::WriteOnly)) return;
+    
+    QTextStream stream(&file);
+    stream << "# Data file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
+
+    // foreach graph
+    int graphIndex;
+    for (graphIndex = 0; graphIndex < ui->plot->graphCount(); graphIndex++)
     {
-        if (m_data_sorted[i].size() == 0) continue;
+        QCPGraph *graph = ui->plot->graph(graphIndex);
 
-        // create file
-        QString filepath = QDir(folder).filePath(QDateTime::currentDateTime().toString() + "_log.dat");
-        QFile file(filepath);
-        if (!file.open(QIODevice::WriteOnly)) return;
+        stream << "#     " << graph->name() << Qt::endl;
 
-        QTextStream stream(&file);
-        stream << "# Log file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
-        stream << "# " << Qt::endl;
-        stream << Qt::endl;
         stream << "# Time \t Value" << Qt::endl;
 
         // get data points
-        QMap<float,float> *data = &m_data_sorted[i];
-        QMap<float,float>::ConstIterator it;
-        for (it = m_data_sorted[i].constBegin(); it != m_data_sorted[i].constEnd(); it++)
+        QSharedPointer<QCPGraphDataContainer> data = graph->data();
+        QCPGraphDataContainer::const_iterator it;
+        for (it = data->constBegin(); it != data->constEnd(); it++)
         {
             // write to file
-            //stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
+            stream << QString::number(it->key) << " \t " << QString::number(it->value) << Qt::endl;
         }
+        stream << Qt::endl;
+    }
+}
+
+void LoggerWindow::mouse_doubleclicked(QMouseEvent *event)
+{
+    // enforced event by library
+    (void)event;
+
+    // reset plot
+    ui->plot->rescaleAxes();
+    ui->plot->replot();
+}
+
+void LoggerWindow::mouse_clicked(QMouseEvent *event)
+{
+    // zoom with right click and pan with left click
+    if (event->buttons() & Qt::RightButton)
+    {
+        ui->plot->setSelectionRectMode(QCP::srmZoom);
+    }
+    else if (event->buttons() & Qt::LeftButton)
+    {
+        ui->plot->setSelectionRectMode(QCP::srmNone);
     }
 }

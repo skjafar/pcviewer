@@ -33,6 +33,9 @@ private slots:
 
     void on_btnSave_clicked();
 
+    void mouse_doubleclicked(QMouseEvent *event);
+    void mouse_clicked(QMouseEvent *event);
+
 private:
     void updateGraph();
 

@@ -108,7 +108,7 @@ void WaveformWidget::saveWaveform(Block *, QByteArray data)
         {
             float value;
             memcpy(&value, data.constData() + i * sizeof(float), sizeof(float));
-            stream << value << QT::endl;
+            stream << value << Qt::endl;
         }
 
         file.close();

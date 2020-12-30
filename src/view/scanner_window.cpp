@@ -27,6 +27,7 @@ ScannerWindow::ScannerWindow(DevicesMap *devicesMap, QWidget *parent) :
     connect(m_scanner, SIGNAL(onCardFound(QString, uint32_t)), this, SLOT(onCardFound(QString, uint32_t)));
     connect(m_scanner, SIGNAL(onScanDone()), this, SLOT(onScanDone()));
 
+    ui->txtIP->setFocus();
     if (SEARCH_AUTOMATICALLY)
     {
         QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();

@@ -30,7 +30,7 @@ PlotterWindow::PlotterWindow(RegistersMap* registers, QWidget *parent) :
 
     connect(ui->txtPlotUpper, SIGNAL(returnPressed()), this, SLOT(manualUpdateAxis()));
     connect(ui->txtPlotLower, SIGNAL(returnPressed()), this, SLOT(manualUpdateAxis()));
-    connect(ui->txtTimeSpan, SIGNAL(returnPressed()(const QString &)), this, SLOT(on_txtTimeSpan_returnPressed()));
+    connect(ui->txtTimeSpan, SIGNAL(returnPressed()), this, SLOT(on_txtTimeSpan_returnPressed()));
 
     QMap<uint16_t, Register*>::const_iterator iterator;
     for (iterator = m_registers->registersByAddress.begin(); iterator != m_registers->registersByAddress.end(); iterator++)
@@ -112,7 +112,7 @@ void WaveformGraph::addPoint()
 
         if (!*m_paused)
         {
-            m_graph->removeDataBefore(sec - graphTimeSpan);
+            m_graph->data()->removeBefore(sec - graphTimeSpan);
         }
 
         m_graph->addData(sec, m_register->type() == REGISTER_TYPE_FLOATING ? m_register->floatVal() : m_register->intVal());
@@ -127,7 +127,7 @@ QPen WaveformGraph::pen() const
 
 void WaveformGraph::removeGraph()
 {
-    m_graph->clearData();
+    m_graph->data()->clear();
 }
 
 void WaveformGraph::setTimeSpan(double timeSpan)
@@ -206,29 +206,28 @@ void PlotterWindow::on_btnSavePNG_clicked()
 
 void PlotterWindow::on_btnSaveData_clicked()
 {
-    QString folder = QFileDialog::getExistingDirectory(this, "Select Folder to Save Data To");
-    if (folder.isEmpty()) return;
-;
+    QString filepath = QFileDialog::getSaveFileName(this, "Select Folder to Save Plot Data To", 
+    QDateTime::currentDateTime().toString(QString("yy-MM-dd_hh.mm")) + "_Plot.dat");
+
+    // create file
+    QFile file(filepath);
+    if (!file.open(QIODevice::WriteOnly)) return;
+    
+    QTextStream stream(&file);
+    stream << "# Data file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
+    
     // foreach graph
     int graphIndex;
     for (graphIndex = 0; graphIndex < ui->plot->graphCount(); graphIndex++)
     {
         QCPGraph *graph = ui->plot->graph(graphIndex);
 
-        // create file
-        QString filepath = QDir(folder).filePath(graph->name() + ".dat");
-        QFile file(filepath);
-        if (!file.open(QIODevice::WriteOnly)) return;
-
-        QTextStream stream(&file);
-        stream << "# Data file generated on " << QDateTime::currentDateTime().toString() << Qt::endl;
-        stream << "# " << graph->name() << Qt::endl;
-        stream << Qt::endl;
+        stream << "#     " << graph->name() << Qt::endl;
         stream << "# Time \t Value" << Qt::endl;
 
         // get data points
-        QCPDataMap *data = graph->data();
-        QCPDataMap::const_iterator it;
+        QSharedPointer<QCPGraphDataContainer> data = graph->data();
+        QCPGraphDataContainer::const_iterator it;
         for (it = data->constBegin(); it != data->constEnd(); it++)
         {
             // write to file
