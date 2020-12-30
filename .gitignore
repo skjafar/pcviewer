@@ -7,3 +7,6 @@ build-*/
 *.o
 .qmake.stash
 .qmake.cache
+*.moc
+moc_*.h
+moc_*.cpp
